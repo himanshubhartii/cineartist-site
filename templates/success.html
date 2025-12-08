@@ -71,9 +71,20 @@
 
     © 2025 CineArtist • Short Films & Stories
 </footer>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggle = document.querySelector(".nav-toggle");
+        const navbar = document.querySelector(".navbar");
 
-
+        if (toggle && navbar) {
+            toggle.addEventListener("click", function () {
+                navbar.classList.toggle("open");
+            });
+        }
+    });
+</script>
 </body>
 </html>
+
 
 
