@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CineArtist | Films</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>CineArtist | Casting</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=5">
 </head>
-
 <body>
+
 <header class="navbar">
     <div class="logo">CineArtist</div>
     <nav>
@@ -23,29 +23,27 @@
 <main class="page">
     <h1>Casting / Auditions</h1>
     <p>
-        If you are an actor, creator or performer and want to work in CineArtist
-        short films, fill the form below.
+        If you are an actor, creator or performer and want to work in CineArtist short films,
+        fill the form below.
     </p>
 
     <form class="form" action="/casting" method="POST">
         <input type="text" name="name" placeholder="Full Name" required>
         <input type="text" name="age" placeholder="Age" required>
         <input type="text" name="city" placeholder="City" required>
-        <textarea name="experience" rows="4"
-                  placeholder="Tell briefly about your acting / theatre / camera experience"></textarea>
-        <input type="text" name="profile_link"
-               placeholder="Portfolio / Instagram / YouTube link (optional)">
+        <textarea name="experience" rows="4" placeholder="Acting / theatre / camera experience (optional)"></textarea>
+        <input type="text" name="profile_link" placeholder="Portfolio / Instagram / YouTube link">
         <button type="submit" class="btn-primary">Submit Application</button>
     </form>
 
-    <p style="margin-top: 10px; font-size: 0.85rem; color:#888;">
-        * Your details are only used for casting-related communication.
+    <p style="margin-top: 10px; font-size: 0.85rem; color:#999;">
+        * Your details are used only for casting-related communication.
     </p>
 </main>
 
 <footer class="footer">
     © 2025 CineArtist • Casting & Collaborations
 </footer>
+
 </body>
 </html>
-
