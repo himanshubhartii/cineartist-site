@@ -472,3 +472,96 @@ body {
         padding: 14px 5%;
     }
 }
+/* ============ HOME EXTRA SECTIONS ============ */
+
+.home-page {
+    padding-top: 32px;
+    padding-bottom: 40px;
+}
+
+.home-section {
+    margin-bottom: 40px;
+}
+
+.section-title {
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+}
+
+.section-text {
+    color: #d0d0d0;
+    margin-top: 4px;
+    margin-bottom: 16px;
+    font-size: 0.95rem;
+}
+
+.home-cta {
+    margin-top: 18px;
+    display: inline-block;
+}
+
+.home-grid {
+    /* same grid, but home page usually fewer cards */
+}
+
+.home-two-col {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 24px;
+    align-items: flex-start;
+    margin-top: 10px;
+}
+
+.home-highlight-box {
+    background: #0d0e16;
+    border-radius: 16px;
+    border: 1px solid #29293a;
+    padding: 18px;
+    box-shadow: 0 10px 26px rgba(0,0,0,0.4);
+}
+
+.home-highlight-box h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.home-highlight-box ul {
+    list-style: none;
+    font-size: 0.9rem;
+    color: #d3d3d3;
+}
+
+.home-highlight-box li {
+    margin-bottom: 6px;
+}
+
+.home-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+/* Secondary button */
+.btn-secondary {
+    padding: 10px 20px;
+    border-radius: 999px;
+    border: 1px solid #e50914;
+    background: transparent;
+    color: #e50914;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: inline-block;
+}
+
+.btn-secondary:hover {
+    background: #e50914;
+    color: #fff;
+}
+
+/* Responsive for home two-column */
+@media (max-width: 900px) {
+    .home-two-col {
+        grid-template-columns: 1fr;
+    }
+}
+
