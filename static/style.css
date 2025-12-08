@@ -564,4 +564,59 @@ body {
         grid-template-columns: 1fr;
     }
 }
+/* ============ CLEAN HOME DESIGN ============ */
+
+.about-card {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 30px;
+    background: #0c0c15;
+    border: 1px solid #1f1f2a;
+    padding: 30px;
+    border-radius: 16px;
+    margin-top: 40px;
+}
+
+.about-card h2 {
+    margin-bottom: 10px;
+}
+
+.about-right h3 {
+    margin-bottom: 12px;
+}
+
+.about-icons span {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 1rem;
+}
+
+.work-section {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.work-buttons {
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.big-btn {
+    padding: 14px 28px;
+    font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .about-card {
+        grid-template-columns: 1fr;
+    }
+    .work-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
 
