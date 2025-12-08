@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CineArtist | Contact</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="navbar">
+    <div class="logo">CineArtist</div>
+    <nav>
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="/films">Films</a>
+    <a href="/stories">Stories</a>
+    <a href="/casting">Casting</a>
+    <a href="/contact">Contact</a>
+</nav>
+
+</header>
+
+<main class="page">
+    <h1>Contact / Collaboration</h1>
+    <p>For collaborations, casting or any query, send a message below:</p>
+
+    <form class="form" action="/contact" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn-primary">Send Message</button>
+    </form>
+</main>
+
+<footer class="footer">
+    Reach me on YouTube • Instagram • Gmail
+</footer>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CineArtist | Casting</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="navbar">
+    <div class="logo">CineArtist</div>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/films">Films</a>
+        <a href="/stories">Stories</a>
+        <a href="/casting" class="active">Casting</a>
+        <a href="/contact">Contact</a>
+    </nav>
+</header>
+
+<main class="page">
+    <h1>Casting / Auditions</h1>
+    <p>
+        If you are an actor, creator or performer and want to work in CineArtist
+        short films, fill the form below.
+    </p>
+
+    <form class="form" action="/casting" method="POST">
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="text" name="age" placeholder="Age" required>
+        <input type="text" name="city" placeholder="City" required>
+        <textarea name="experience" rows="4"
+                  placeholder="Tell briefly about your acting / theatre / camera experience"></textarea>
+        <input type="text" name="profile_link"
+               placeholder="Portfolio / Instagram / YouTube link (optional)">
+        <button type="submit" class="btn-primary">Submit Application</button>
+    </form>
+
+    <p style="margin-top: 10px; font-size: 0.85rem; color:#888;">
+        * Your details are only used for casting-related communication.
+    </p>
+</main>
+
+<footer class="footer">
+    © 2025 CineArtist • Casting & Collaborations
+</footer>
+</body>
+</html>

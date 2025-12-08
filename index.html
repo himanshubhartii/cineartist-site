@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CineArtist | Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+    <div class="logo">CineArtist</div>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/films">Films</a>
+        <a href="/stories">Stories</a>
+        <a href="/casting">Casting</a>
+        <a href="/contact">Contact</a>
+    </nav>
+</header>
+
+    <!-- Hero Section -->
+    <!-- CINEMATIC HERO BANNER -->
+<!-- CINEMATIC HERO BANNER -->
+<section class="hero-banner">
+    <!-- Blurred background image -->
+    <div class="hero-bg" style="background-image: url('{{ latest_film.thumb }}');"></div>
+    <div class="hero-overlay"></div>
+
+    <!-- Animated text -->
+    <div class="hero-text">
+        <h1 class="hero-title">CineArtist</h1>
+        <p class="hero-subtitle">
+            Latest Film: <span>{{ latest_film.title }}</span>
+        </p>
+        <a href="{{ latest_film.url }}" target="_blank" class="btn-primary hero-btn">
+            Watch Latest Film on YouTube
+        </a>
+    </div>
+</section>
+
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        © {{ 2025 }} CineArtist • Created by Himanshu Bharti
+    </footer>
+</body>
+</html>

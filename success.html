@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .success-container {
+            max-width: 600px;
+            margin: 120px auto;
+            background: #101118;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid #222;
+        }
+        .success-title {
+            font-size: 1.8rem;
+            margin-bottom: 14px;
+            color: #fff;
+        }
+        .success-message {
+            font-size: 1rem;
+            color: #ccc;
+            margin-bottom: 25px;
+        }
+        .btn-back {
+            padding: 12px 24px;
+            background: #e50914;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 100px;
+            font-size: 1rem;
+            display: inline-block;
+            transition: 0.3s;
+        }
+        .btn-back:hover {
+            background: #b50710;
+        }
+    </style>
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">CineArtist</div>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/films">Films</a>
+        <a href="/stories">Stories</a>
+        <a href="/casting">Casting</a>
+        <a href="/contact">Contact</a>
+    </nav>
+</header>
+
+<div class="success-container">
+    <h1 class="success-title">{{ title }}</h1>
+    <p class="success-message">{{ message }}</p>
+    <a class="btn-back" href="/">Go Back Home</a>
+</div>
+
+</body>
+</html>
