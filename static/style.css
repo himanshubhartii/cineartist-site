@@ -1,59 +1,65 @@
-/* ====== GLOBAL RESET ====== */
+/* ================================
+   GLOBAL RESET & BASE STYLES
+================================ */
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 body {
-    background: #040509;
+    background: #030309;
     color: #f5f5f5;
+    overflow-x: hidden;
 }
 
-/* ====== NAVBAR ====== */
+/* ================================
+   NAVBAR
+================================ */
 .navbar {
+    width: 100%;
+    padding: 14px 7%;
+    background: rgba(3,3,9,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #151521;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 14px 7%;
-    background: rgba(4, 5, 9, 0.96);
-    border-bottom: 1px solid #181920;
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    backdrop-filter: blur(10px);
 }
 
 .logo {
-    font-weight: 800;
     font-size: 1.4rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 0.12em;
 }
 
 .navbar nav a {
-    margin-left: 18px;
+    margin-left: 20px;
     text-decoration: none;
-    color: #c7c7c7;
+    color: #ccc;
     font-size: 0.95rem;
+    padding-bottom: 2px;
     position: relative;
-    padding-bottom: 3px;
+}
+
+.navbar nav a:hover,
+.navbar nav a.active {
+    color: #fff;
 }
 
 .navbar nav a::after {
     content: "";
     position: absolute;
+    width: 0%;
     left: 0;
-    bottom: 0;
     height: 2px;
-    width: 0;
+    bottom: 0;
     background: #e50914;
-    transition: width 0.2s ease-out;
-}
-
-.navbar nav a:hover {
-    color: #ffffff;
+    transition: 0.25s;
 }
 
 .navbar nav a:hover::after,
@@ -61,50 +67,16 @@ body {
     width: 100%;
 }
 
-/* ====== BUTTONS ====== */
-.btn-primary,
-.btn-secondary {
-    display: inline-block;
-    padding: 10px 24px;
-    border-radius: 999px;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 0.95rem;
-    transition: 0.25s ease;
-}
-
-.btn-primary {
-    background: #e50914;
-    color: #fff;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
-}
-
-.btn-primary:hover {
-    background: #b70710;
-    transform: translateY(-1px);
-}
-
-.btn-secondary {
-    background: transparent;
-    border: 1px solid #e50914;
-    color: #e50914;
-}
-
-.btn-secondary:hover {
-    background: #e50914;
-    color: #fff;
-}
-
-/* ====== CINEMATIC HERO SECTION ====== */
+/* ================================
+   HERO BANNER
+================================ */
 .hero-banner {
     position: relative;
     height: 80vh;
-    min-height: 420px;
+    min-height: 450px;
     width: 100%;
     overflow: hidden;
-    border-bottom: 1px solid #181920;
-    animation: heroFadeIn 1.2s ease-out forwards;
+    border-bottom: 1px solid #222;
 }
 
 /* blurred background */
@@ -114,55 +86,54 @@ body {
     background-size: cover;
     background-position: center;
     filter: blur(4px);
-    transform: scale(1.07);
+    transform: scale(1.06);
 }
 
-/* dark gradient overlay */
+/* dark overlay */
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at top, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.9));
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.85));
 }
 
-/* text + button */
+/* text */
 .hero-text {
     position: absolute;
-    left: 8%;
     bottom: 18%;
-    color: #fff;
-    max-width: 520px;
-    animation: heroSlideUp 0.9s ease-out forwards;
+    left: 8%;
+    max-width: 600px;
 }
 
 .hero-title {
-    font-size: 3.5rem;
+    font-size: 3.6rem;
     font-weight: 800;
     letter-spacing: 0.12em;
-    margin-bottom: 10px;
-    text-transform: uppercase;
 }
 
 .hero-subtitle {
-    font-size: 1.1rem;
-    color: #e0e0e0;
-    margin-bottom: 22px;
-}
-
-.hero-subtitle span {
-    color: #ffb347;
-    font-weight: 600;
+    margin-top: 10px;
+    font-size: 1.2rem;
+    color: #e7e7e7;
 }
 
 .hero-btn {
-    font-size: 1rem;
-    padding: 12px 28px;
+    margin-top: 22px;
+    padding: 12px 30px;
+    background: #e50914;
+    color: #fff;
+    text-decoration: none;
     border-radius: 999px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
-    animation: heroBtnPop 1s ease-out 0.3s forwards;
-    opacity: 0;
+    font-size: 1rem;
+    display: inline-block;
 }
 
-/* ====== INNER PAGES CONTAINER ====== */
+.hero-btn:hover {
+    background: #b70810;
+}
+
+/* ================================
+   PAGE CONTAINER
+================================ */
 .page {
     padding: 40px 7%;
     max-width: 1400px;
@@ -170,30 +141,30 @@ body {
 }
 
 .page h1 {
-    font-size: 2.1rem;
-    margin-bottom: 12px;
+    font-size: 2.2rem;
+    margin-bottom: 10px;
 }
 
 .page p {
-    margin-bottom: 10px;
     color: #d0d0d0;
 }
 
-/* ====== GRID CARDS (Films / Stories) ====== */
+/* ================================
+   CARD GRID (FILMS / STORIES)
+================================ */
 .card-grid {
+    margin-top: 30px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    margin-top: 24px;
+    gap: 22px;
 }
 
 .card {
+    background: #0d0e16;
+    border: 1px solid #1f1f2b;
     padding: 16px;
-    border-radius: 18px;
-    background: #0d0e15;
-    border: 1px solid #20212c;
-    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.5);
-    transition: 0.25s ease;
+    border-radius: 16px;
+    transition: 0.25s;
 }
 
 .card:hover {
@@ -202,31 +173,29 @@ body {
 }
 
 .card h2 {
-    margin-bottom: 6px;
     font-size: 1.1rem;
+    margin-bottom: 6px;
 }
 
 .card p {
     font-size: 0.9rem;
-    color: #c3c3c3;
+    color: #ccc;
 }
 
-/* ====== YOUTUBE THUMB CARDS ====== */
+/* THUMBNAIL */
 .thumb-wrapper {
+    margin-top: 12px;
     position: relative;
-    width: 100%;
     border-radius: 14px;
     overflow: hidden;
     cursor: pointer;
-    margin-top: 10px;
 }
 
 .thumb-wrapper img {
     width: 100%;
-    display: block;
     border-radius: 14px;
-    filter: brightness(0.85);
-    transition: 0.25s ease;
+    filter: brightness(0.8);
+    transition: 0.25s;
 }
 
 .thumb-wrapper:hover img {
@@ -234,165 +203,175 @@ body {
     transform: scale(1.03);
 }
 
+/* Play button */
 .play-btn {
+    font-size: 48px;
+    color: white;
+    opacity: 0.85;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 50px;
-    color: white;
-    opacity: 0.8;
-    pointer-events: none;
-    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.8);
 }
 
-/* ====== FORMS (Contact / Casting) ====== */
+/* ================================
+   FORMS (CONTACT + CASTING)
+================================ */
 .form {
-    margin-top: 18px;
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    max-width: 520px;
+    max-width: 500px;
+    gap: 12px;
 }
 
 .form input,
 .form textarea {
-    background: #101118;
-    border: 1px solid #333544;
-    border-radius: 8px;
-    padding: 10px;
-    color: #f5f5f5;
+    background: #11121a;
+    border: 1px solid #2f2f3d;
+    padding: 12px;
+    border-radius: 10px;
+    color: #fff;
     font-size: 0.95rem;
-}
-
-.form input::placeholder,
-.form textarea::placeholder {
-    color: #77798a;
 }
 
 .form input:focus,
 .form textarea:focus {
-    outline: none;
     border-color: #e50914;
+    outline: none;
 }
 
-/* ====== SUCCESS PAGE ====== */
+.btn-primary {
+    padding: 12px 20px;
+    border-radius: 999px;
+    background: #e50914;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background: #c10812;
+}
+
+/* ================================
+   SUCCESS PAGE
+================================ */
 .success-container {
+    margin: 100px auto;
     max-width: 600px;
-    margin: 120px auto;
-    background: #101118;
+    background: #11121a;
     padding: 40px;
-    border-radius: 20px;
+    border-radius: 18px;
     text-align: center;
-    border: 1px solid #222;
+    border: 1px solid #2d2d38;
 }
 
 .success-title {
     font-size: 1.8rem;
-    margin-bottom: 14px;
-    color: #fff;
+    margin-bottom: 10px;
 }
 
 .success-message {
     font-size: 1rem;
     color: #ccc;
-    margin-bottom: 25px;
+    margin-bottom: 22px;
 }
 
 .btn-back {
-    padding: 12px 24px;
     background: #e50914;
+    padding: 12px 20px;
     color: #fff;
+    border-radius: 999px;
     text-decoration: none;
-    border-radius: 100px;
-    font-size: 1rem;
-    display: inline-block;
-    transition: 0.3s;
 }
 
-.btn-back:hover {
-    background: #b50710;
-}
-
-/* ====== FOOTER ====== */
+/* ================================
+   FOOTER
+================================ */
 .footer {
-    padding: 16px 7%;
     text-align: center;
-    font-size: 0.85rem;
-    color: #8a8a8a;
-    border-top: 1px solid #181920;
     margin-top: 40px;
+    padding: 18px;
+    font-size: 0.85rem;
+    color: #999;
+    border-top: 1px solid #1b1b25;
 }
 
-/* ====== ANIMATIONS ====== */
-@keyframes heroFadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
+/* ================================
+   RESPONSIVE DESIGN (IMPORTANT)
+================================ */
 
-@keyframes heroSlideUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes heroBtnPop {
-    0% {
-        opacity: 0;
-        transform: translateY(15px) scale(0.95);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-/* ====== RESPONSIVE BREAKPOINTS ====== */
+/* TABLET */
 @media (max-width: 1100px) {
     .card-grid {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
-@media (max-width: 800px) {
-    .card-grid {
-        grid-template-columns: repeat(2, 1fr);
+/* MOBILE */
+@media (max-width: 768px) {
+
+    .navbar {
+        padding: 12px 5%;
     }
+
+    .navbar nav a {
+        margin-left: 12px;
+        font-size: 0.8rem;
+    }
+
+    .hero-banner {
+        height: 60vh;
+        min-height: 360px;
+    }
+
     .hero-text {
         left: 6%;
         right: 6%;
         bottom: 14%;
     }
+
     .hero-title {
         font-size: 2.4rem;
     }
+
     .hero-subtitle {
         font-size: 1rem;
     }
+
     .hero-btn {
         width: 100%;
         text-align: center;
+        font-size: 0.9rem;
     }
-    .navbar {
-        padding-inline: 5%;
+
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
+
 }
 
+/* SMALL MOBILE */
 @media (max-width: 500px) {
     .card-grid {
         grid-template-columns: 1fr;
     }
-    .navbar nav a {
-        margin-left: 10px;
-        font-size: 0.85rem;
+
+    .hero-title {
+        font-size: 2rem;
     }
+
+    .hero-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .hero-btn {
+        padding: 10px;
+    }
+
     .success-container {
-        margin: 90px 20px;
-        padding: 28px;
+        margin: 60px 20px;
+        padding: 25px;
     }
 }
