@@ -2,12 +2,33 @@ import os
 import csv
 from datetime import datetime
 
-from flask import Flask, render_template, request, abort
+from flask import (
+    Flask,
+    render_template,
+    request,
+    abort,
+    session,
+    redirect,
+    url_for,
+)
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
-# ---------- FILE UPLOAD SETTINGS ----------
+# -------------------------
+# SECRET KEY (for login)
+# -------------------------
+app.secret_key = "cineartist-secret-key"
+
+# -------------------------
+# ADMIN LOGIN CREDENTIALS
+# -------------------------
+ADMIN_USERNAME = "admin"
+ADMIN_PASSWORD = "cineartist123"
+
+# -------------------------
+# FILE UPLOAD SETTINGS
+# -------------------------
 BASE_DIR = os.path.dirname(__file__)
 UPLOAD_FOLDER = os.path.join(BASE_DIR, "uploads", "stories")
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -16,35 +37,37 @@ ALLOWED_EXTENSIONS = {"pdf", "doc", "docx"}
 
 
 def allowed_file(filename: str) -> bool:
+    """Check file extension"""
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-# ---------- Helper: Save to CSV ----------
+# -------------------------
+# SAVE ROW TO CSV
+# -------------------------
 def append_to_csv(filename, header_row, data_row):
     file_exists = os.path.isfile(filename)
 
     with open(filename, "a", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
+
         if not file_exists:
             writer.writerow(header_row)
+
         writer.writerow(data_row)
 
 
-# ---------- STORY DATABASE WITH TAGS ----------
+# -------------------------
+# STORIES DATABASE
+# -------------------------
 STORIES = [
     {
         "slug": "papa-beta-aur-ek-sapna",
         "title": "Papa, Beta aur Ek Sapna",
         "short": "A father silently sacrificing his dreams so his son can chase his own.",
         "full": [
-            "A middle-class father works extra hours so his son can study in a better school. "
-            "He never talks about his own unfulfilled dreams of becoming an artist.",
-
-            "One day, the son discovers his father’s old sketchbook and realises that the life "
-            "he is living today is built on the dreams his father quietly gave up.",
-
-            "The story follows their emotional conversation where, for the first time, both of them "
-            "talk openly about fear, dreams and expectations."
+            "A middle-class father works extra hours so his son can study in a better school.",
+            "One day, the son discovers his father’s old sketchbook and realises how much he sacrificed.",
+            "Their emotional conversation shows how fear and expectations shape our dreams."
         ],
         "tags": ["Family", "Emotional", "Drama"],
     },
@@ -53,57 +76,60 @@ STORIES = [
         "title": "Deadline",
         "short": "A young professional stuck between office targets and mental peace.",
         "full": [
-            "A first-job employee keeps chasing deadlines, ignoring his friends, health and family.",
-            "When one missed call changes everything, he starts questioning what ‘success’ really means.",
-            "The story explores burnout, expectations and the cost of ignoring yourself."
+            "A new office employee keeps chasing deadlines and forgetting himself.",
+            "One missed call changes everything and forces him to rethink life.",
+            "A story about burnout, pressure and rediscovering balance."
         ],
         "tags": ["Corporate", "Mental Health"],
     },
     {
         "slug": "last-bench",
         "title": "Last Bench",
-        "short": "School memories, friendships and the people we lose touch with.",
+        "short": "School memories and friendships we lose touch with.",
         "full": [
-            "A reunion brings an introvert face-to-face with memories of old school friends.",
-            "Scrolling through old photos makes him wonder how easily people drift apart.",
-            "The story is about one text he finally sends after years of silence."
+            "A school reunion triggers memories of old friends and moments.",
+            "Old photos make him question why people drift apart.",
+            "He finally sends a message that he kept unsent for years."
         ],
         "tags": ["Friendship", "Nostalgia"],
     },
     {
         "slug": "parallel-festival",
         "title": "Parallel Festival",
-        "short": "What if festivals were celebrated in a completely different world?",
+        "short": "What if festivals were celebrated differently in another world?",
         "full": [
-            "Two versions of the same family celebrate a festival — one rich, one struggling.",
-            "The contrast shows that love defines happiness, not budget."
+            "Two parallel versions of a family celebrate the same festival.",
+            "One rich, one struggling — but love decides happiness, not money."
         ],
         "tags": ["Fantasy", "Emotion"],
     },
     {
         "slug": "unsent-messages",
         "title": "Unsent Messages",
-        "short": "All the things we type on our phone… and never press send.",
+        "short": "The things we type but never send.",
         "full": [
-            "A character writes long emotional messages but never sends them.",
-            "One night, due to a mistake, all those drafts get delivered.",
+            "A character writes emotional messages but never sends them.",
+            "One night all drafts get sent accidentally — chaos begins."
         ],
         "tags": ["Drama", "Relationships"],
     },
     {
         "slug": "invisible-hero",
         "title": "Invisible Hero",
-        "short": "The unnoticed person in every family who quietly keeps everyone together.",
+        "short": "The unnoticed person in every family who keeps it together.",
         "full": [
-            "Every family has someone who wakes up first and sleeps last.",
-            "This story shows that person from each family member’s perspective."
+            "Every family has someone who sacrifices without saying a word.",
+            "A story told through the eyes of each family member."
         ],
         "tags": ["Family", "Slice of Life"],
     },
 ]
 
 
-# ---------- ROUTES ----------
+# ==========================================================
+# BASIC ROUTES
+# ==========================================================
+
 @app.route("/")
 def home():
     latest_film = {
@@ -124,7 +150,10 @@ def films():
     return render_template("films.html")
 
 
-# ---------- STORIES (LIST + UPLOAD) ----------
+# ==========================================================
+# STORIES PAGE (LIST + UPLOAD)
+# ==========================================================
+
 @app.route("/stories", methods=["GET", "POST"])
 def stories():
     if request.method == "POST":
@@ -153,12 +182,23 @@ def stories():
 
             msg = "Thank you! Your story has been uploaded."
 
-        return render_template("stories.html", stories=STORIES, upload_message=msg)
+        return render_template(
+            "stories.html",
+            stories=STORIES,
+            upload_message=msg
+        )
 
-    return render_template("stories.html", stories=STORIES, upload_message=None)
+    return render_template(
+        "stories.html",
+        stories=STORIES,
+        upload_message=None
+    )
 
 
-# ---------- STORY DETAIL ----------
+# ==========================================================
+# SINGLE STORY DETAIL PAGE
+# ==========================================================
+
 @app.route("/stories/<slug>")
 def story_detail(slug):
     story = next((s for s in STORIES if s["slug"] == slug), None)
@@ -167,7 +207,10 @@ def story_detail(slug):
     return render_template("story_detail.html", story=story)
 
 
-# ---------- CASTING ----------
+# ==========================================================
+# CASTING FORM
+# ==========================================================
+
 @app.route("/casting", methods=["GET", "POST"])
 def casting():
     if request.method == "POST":
@@ -192,7 +235,10 @@ def casting():
     return render_template("casting.html")
 
 
-# ---------- CONTACT ----------
+# ==========================================================
+# CONTACT FORM
+# ==========================================================
+
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
@@ -215,6 +261,67 @@ def contact():
     return render_template("contact.html")
 
 
-# ---------- MAIN ----------
+# ==========================================================
+# ADMIN LOGIN
+# ==========================================================
+
+@app.route("/admin/login", methods=["GET", "POST"])
+def admin_login():
+    if request.method == "POST":
+        username = request.form.get("username", "")
+        password = request.form.get("password", "")
+
+        if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
+            session["admin"] = True
+            return redirect("/admin/dashboard")
+        else:
+            return render_template("admin_login.html", error="Invalid credentials")
+
+    return render_template("admin_login.html", error=None)
+
+
+@app.route("/admin/logout")
+def admin_logout():
+    session.pop("admin", None)
+    return redirect("/admin/login")
+
+
+# ==========================================================
+# ADMIN DASHBOARD
+# ==========================================================
+
+@app.route("/admin/dashboard")
+def admin_dashboard():
+    if not session.get("admin"):
+        return redirect("/admin/login")
+
+    casting_data = []
+    contact_data = []
+    story_data = []
+
+    if os.path.exists("casting_data.csv"):
+        with open("casting_data.csv", newline="", encoding="utf-8") as f:
+            casting_data = list(csv.reader(f))
+
+    if os.path.exists("contact_data.csv"):
+        with open("contact_data.csv", newline="", encoding="utf-8") as f:
+            contact_data = list(csv.reader(f))
+
+    if os.path.exists("story_submissions.csv"):
+        with open("story_submissions.csv", newline="", encoding="utf-8") as f:
+            story_data = list(csv.reader(f))
+
+    return render_template(
+        "admin_dashboard.html",
+        casting_data=casting_data,
+        contact_data=contact_data,
+        story_data=story_data,
+    )
+
+
+# ==========================================================
+# MAIN
+# ==========================================================
+
 if __name__ == "__main__":
     app.run(debug=True)
