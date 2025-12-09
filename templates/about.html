@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CineArtist | About</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=5">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=7">
 </head>
 <body>
 
@@ -29,24 +29,125 @@
     </nav>
 </header>
 
+<!-- TOP HERO SECTION -->
+<section class="about-hero">
+    <div class="about-hero-inner">
+        <h1>About CineArtist</h1>
+        <p>
+            A small-town YouTube experiment that grew into a space for 
+            cinematic short films and emotional storytelling.
+        </p>
+    </div>
+</section>
 
-<main class="page">
-    <h1>About CineArtist</h1>
-    <p>
-        CineArtist is a passion-driven film space by <strong>Himanshu Bharti</strong> – 
-        focused on storytelling, emotions and relatable characters.
-    </p>
-    <p>
-        From writing and direction to editing and production, every project is crafted
-        with a cinematic approach, keeping real life and real people at the center.
-    </p>
-    <p>
-        Short films, sketches, social messages and experimental visuals – 
-        CineArtist is a playground to explore ideas and connect with the audience.
-    </p>
-    <p>
-        This website is a home for all CineArtist projects – films, stories, casting and collaborations.
-    </p>
+<main class="page about-page">
+
+    <!-- STORY BLOCK -->
+    <section class="about-layout">
+        <div class="about-text">
+            <h2>Our Journey</h2>
+
+            <p>
+                CineArtist originally started as <b>SANM Captures</b> — a small creative
+                attempt made in a small town with one simple aim: to tell stories that
+                felt honest, relatable and full of emotion.
+            </p>
+
+            <p>
+                With no professional camera or big setup, everything began with a basic
+                phone camera, homemade lighting and a passionate team experimenting
+                with short films after school, college and work. Slowly, people started
+                connecting with the raw, real-life inspired stories.
+            </p>
+
+            <p>
+                In <b>2024</b>, SANM Captures evolved into <b>CineArtist</b> — a name that
+                represents cinematic storytelling, simple visuals and expressive characters.
+            </p>
+
+            <p>
+                Today, CineArtist continues to create short films, stories and character
+                moments with the same belief:
+                <i>"Real emotions and simple visuals can touch people deeply."</i>
+            </p>
+        </div>
+
+        <aside class="about-side-card">
+            <h3>From Then to Now</h3>
+            <ul class="about-journey">
+                <li><b>Past:</b> Started as SANM Captures with a phone camera and homemade lights.</li>
+                <li><b>Place:</b> Born in a small-town environment full of real stories and real people.</li>
+                <li><b>2024:</b> Rebranded to CineArtist to expand creative vision.</li>
+                <li><b>Now:</b> A YouTube space for cinematic short films & emotional storytelling.</li>
+            </ul>
+        </aside>
+    </section>
+
+    <!-- TIMELINE -->
+    <section class="about-section">
+        <h2>Timeline</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <span class="time-label">Early Days</span>
+                <p>Phone camera, borrowed lights, and late-night shoots with a small team.</p>
+            </div>
+            <div class="timeline-item">
+                <span class="time-label">SANM Captures</span>
+                <p>First short films uploaded, audience slowly started connecting to the stories.</p>
+            </div>
+            <div class="timeline-item">
+                <span class="time-label">2024 – CineArtist</span>
+                <p>Rebranded to CineArtist to move towards more focused cinematic storytelling.</p>
+            </div>
+            <div class="timeline-item">
+                <span class="time-label">Today</span>
+                <p>Short films, emotional stories and collaborations with new actors & creators.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="about-section">
+        <h2>At a Glance</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Short Films</h3>
+                <p>Multiple films across emotion, drama and comedy.</p>
+            </div>
+            <div class="stat-card">
+                <h3>Genres</h3>
+                <p>Emotional stories, comedy sketches & slice-of-life moments.</p>
+            </div>
+            <div class="stat-card">
+                <h3>Focus</h3>
+                <p>Real characters, small moments and honest emotions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS / WHAT WE DO -->
+    <section class="about-section">
+        <h2>What Happens at CineArtist</h2>
+        <div class="skills-grid">
+            <div class="skill-item">Story & Concept</div>
+            <div class="skill-item">Writing & Direction</div>
+            <div class="skill-item">Cinematography</div>
+            <div class="skill-item">Performance & Acting</div>
+            <div class="skill-item">Editing & Sound</div>
+            <div class="skill-item">YouTube Content Strategy</div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="about-section about-cta">
+        <h2>Want to be a part of this journey?</h2>
+        <p>Actors, creators, brands – CineArtist is open for new collaborations.</p>
+        <div class="about-cta-buttons">
+            <a href="/casting" class="btn-primary">Casting / Auditions</a>
+            <a href="/contact" class="btn-secondary">Contact / Collaboration</a>
+        </div>
+    </section>
+
 </main>
 
 <footer class="footer">
@@ -84,6 +185,7 @@
 
     © 2025 CineArtist • Short Films & Stories
 </footer>
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const toggle = document.querySelector(".nav-toggle");
@@ -97,9 +199,5 @@
     });
 </script>
 
-
 </body>
 </html>
-
-
-
