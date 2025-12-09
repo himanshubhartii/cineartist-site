@@ -779,6 +779,23 @@ body {
         grid-template-columns: 1fr;
     }
 }
+.story-link {
+    margin-top: 8px;
+    display: inline-block;
+    font-size: 0.88rem;
+    color: #ffb347;
+    text-decoration: none;
+}
+
+.story-link:hover {
+    text-decoration: underline;
+}
+
+.story-detail-page .story-body p {
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
 
 
 
