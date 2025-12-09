@@ -12,26 +12,7 @@
 
 <body>
 
-<header class="navbar">
-    <div class="logo">CineArtist</div>
 
-    <!-- Hamburger button -->
-    <button class="nav-toggle" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-
-    <!-- Nav links -->
-    <nav class="nav-links">
-        <a href="/" class="{% if request.path == '/' %}active{% endif %}">Home</a>
-        <a href="/about" class="{% if request.path == '/about' %}active{% endif %}">About</a>
-        <a href="/films" class="{% if request.path == '/films' %}active{% endif %}">Films</a>
-        <a href="/stories" class="{% if request.path == '/stories' %}active{% endif %}">Stories</a>
-        <a href="/casting" class="{% if request.path == '/casting' %}active{% endif %}">Casting</a>
-        <a href="/contact" class="{% if request.path == '/contact' %}active{% endif %}">Contact</a>
-    </nav>
-</header>
 
 <!-- HERO BANNER -->
 <section class="hero-banner">
