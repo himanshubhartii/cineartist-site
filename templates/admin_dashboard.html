@@ -2,7 +2,131 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Admin Panel | CineArtist</title><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <title>Admin Panel | CineArtist</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Main site styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=13">
+    <!-- Extra styles only for admin panel -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}?v=1">
+</head>
+<body>
+
+<div class="admin-page">
+
+    <!-- Header row -->
+    <header class="admin-header-row">
+        <div>
+            <h1 class="admin-title">CineArtist Admin Panel</h1>
+            <p class="admin-subtitle">
+                View story uploads, contact messages and casting applications.
+            </p>
+        </div>
+
+        <div class="admin-header-actions">
+            <a href="/" class="btn-secondary tiny-btn">Back to site</a>
+            <a href="{{ url_for('admin_logout') }}" class="btn-secondary small-btn">
+                Logout
+            </a>
+        </div>
+    </header>
+
+    <!-- STORY UPLOADS -->
+    <section class="admin-section">
+        <div class="admin-section-header">
+            <div>
+                <h2>Story Uploads</h2>
+                <p>All uploaded story files (PDF / DOCX).</p>
+            </div>
+            <a href="{{ url_for('admin_download', kind='stories') }}" class="btn-secondary tiny-btn">
+                Download CSV
+            </a>
+        </div>
+
+        {% if story_data and story_data|length > 1 %}
+        <div class="admin-table-wrapper">
+            <table class="admin-table">
+                {% for row in story_data %}
+                    <tr>
+                        {% for col in row %}
+                        <td>{{ col }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% else %}
+        <p class="admin-empty">No story uploads yet.</p>
+        {% endif %}
+    </section>
+
+    <!-- CONTACT MESSAGES -->
+    <section class="admin-section">
+        <div class="admin-section-header">
+            <div>
+                <h2>Contact Messages</h2>
+                <p>Messages received from the contact form.</p>
+            </div>
+            <a href="{{ url_for('admin_download', kind='contact') }}" class="btn-secondary tiny-btn">
+                Download CSV
+            </a>
+        </div>
+
+        {% if contact_data and contact_data|length > 1 %}
+        <div class="admin-table-wrapper">
+            <table class="admin-table">
+                {% for row in contact_data %}
+                <tr>
+                    {% for col in row %}
+                    <td>{{ col }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% else %}
+        <p class="admin-empty">No contact messages yet.</p>
+        {% endif %}
+    </section>
+
+    <!-- CASTING APPLICATIONS -->
+    <section class="admin-section">
+        <div class="admin-section-header">
+            <div>
+                <h2>Casting Applications</h2>
+            <p>Actors and applicants who filled the casting form.</p>
+            </div>
+            <a href="{{ url_for('admin_download', kind='casting') }}" class="btn-secondary tiny-btn">
+                Download CSV
+            </a>
+        </div>
+
+        {% if casting_data and casting_data|length > 1 %}
+        <div class="admin-table-wrapper">
+            <table class="admin-table">
+                {% for row in casting_data %}
+                <tr>
+                    {% for col in row %}
+                    <td>{{ col }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% else %}
+        <p class="admin-empty">No casting applications yet.</p>
+        {% endif %}
+    </section>
+
+</div>
+
+</body>
+</html>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=12">
 </head>
