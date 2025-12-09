@@ -1,6 +1,8 @@
 import os
-import csv
+import sqlite3
 from datetime import datetime
+import io
+import csv
 
 from flask import (
     Flask,
@@ -10,7 +12,7 @@ from flask import (
     session,
     redirect,
     url_for,
-    send_file,
+    Response,
 )
 from werkzeug.utils import secure_filename
 
@@ -25,7 +27,7 @@ app.secret_key = "cineartist-secret-key"
 # ADMIN LOGIN CREDENTIALS
 # -------------------------
 ADMIN_USERNAME = "admin"
-ADMIN_PASSWORD = "Himanshu@cine123"
+ADMIN_PASSWORD = "cineartist123"
 
 # -------------------------
 # FILE UPLOAD SETTINGS
@@ -43,22 +45,73 @@ def allowed_file(filename: str) -> bool:
 
 
 # -------------------------
-# SAVE ROW TO CSV
+# DATABASE (SQLite)
 # -------------------------
-def append_to_csv(filename, header_row, data_row):
-    file_exists = os.path.isfile(filename)
+DB_PATH = os.path.join(BASE_DIR, "database.db")
 
-    with open(filename, "a", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f)
 
-        if not file_exists:
-            writer.writerow(header_row)
+def get_db():
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    return conn
 
-        writer.writerow(data_row)
+
+def init_db():
+    conn = get_db()
+    cur = conn.cursor()
+
+    # Story uploads (user submitted scripts)
+    cur.execute(
+        """
+        CREATE TABLE IF NOT EXISTS story_uploads (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            uploaded_at TEXT NOT NULL,
+            name TEXT,
+            email TEXT,
+            title TEXT,
+            filename TEXT
+        )
+        """
+    )
+
+    # Contact messages
+    cur.execute(
+        """
+        CREATE TABLE IF NOT EXISTS contact_messages (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            created_at TEXT NOT NULL,
+            name TEXT,
+            email TEXT,
+            message TEXT
+        )
+        """
+    )
+
+    # Casting applications
+    cur.execute(
+        """
+        CREATE TABLE IF NOT EXISTS casting_submissions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            created_at TEXT NOT NULL,
+            name TEXT,
+            age TEXT,
+            city TEXT,
+            experience TEXT,
+            profile_link TEXT
+        )
+        """
+    )
+
+    conn.commit()
+    conn.close()
+
+
+# Call once at startup
+init_db()
 
 
 # -------------------------
-# STORIES DATABASE
+# STORIES DATABASE (STATIC)
 # -------------------------
 STORIES = [
     {
@@ -175,11 +228,18 @@ def stories():
             filename = f"{timestamp}_{safe_name}"
             file.save(os.path.join(UPLOAD_FOLDER, filename))
 
-            append_to_csv(
-                "story_submissions.csv",
-                ["Uploaded At", "Name", "Email", "Title", "Filename"],
-                [datetime.now().isoformat(), name, email, title, filename],
+            # Save in DB
+            conn = get_db()
+            cur = conn.cursor()
+            cur.execute(
+                """
+                INSERT INTO story_uploads (uploaded_at, name, email, title, filename)
+                VALUES (?, ?, ?, ?, ?)
+                """,
+                (datetime.now().isoformat(), name, email, title, filename),
             )
+            conn.commit()
+            conn.close()
 
             msg = "Thank you! Your story has been uploaded."
 
@@ -221,11 +281,19 @@ def casting():
         experience = request.form.get("experience", "")
         profile_link = request.form.get("profile_link", "")
 
-        append_to_csv(
-            "casting_data.csv",
-            ["Name", "Age", "City", "Experience", "Profile Link"],
-            [name, age, city, experience, profile_link],
+        conn = get_db()
+        cur = conn.cursor()
+        cur.execute(
+            """
+            INSERT INTO casting_submissions (
+                created_at, name, age, city, experience, profile_link
+            )
+            VALUES (?, ?, ?, ?, ?, ?)
+            """,
+            (datetime.now().isoformat(), name, age, city, experience, profile_link),
         )
+        conn.commit()
+        conn.close()
 
         return render_template(
             "success.html",
@@ -245,13 +313,19 @@ def contact():
     if request.method == "POST":
         name = request.form.get("name", "")
         email = request.form.get("email", "")
-        message = request.form.get("message", "")
+        message_text = request.form.get("message", "")
 
-        append_to_csv(
-            "contact_data.csv",
-            ["Name", "Email", "Message"],
-            [name, email, message],
+        conn = get_db()
+        cur = conn.cursor()
+        cur.execute(
+            """
+            INSERT INTO contact_messages (created_at, name, email, message)
+            VALUES (?, ?, ?, ?)
+            """,
+            (datetime.now().isoformat(), name, email, message_text),
         )
+        conn.commit()
+        conn.close()
 
         return render_template(
             "success.html",
@@ -296,28 +370,89 @@ def admin_dashboard():
     if not session.get("admin"):
         return redirect("/admin/login")
 
-    def safe_read(path):
-        if os.path.exists(path):
-            with open(path, newline="", encoding="utf-8") as f:
-                return list(csv.reader(f))
-        return []
+    conn = get_db()
+    cur = conn.cursor()
 
-    casting_data = safe_read("casting_data.csv")
-    contact_data = safe_read("contact_data.csv")
-    story_data = safe_read("story_submissions.csv")
+    # Story uploads
+    cur.execute(
+        """
+        SELECT uploaded_at, name, email, title, filename
+        FROM story_uploads
+        ORDER BY uploaded_at DESC
+        """
+    )
+    story_rows = cur.fetchall()
 
-    # human readable date for story_data
-    if story_data:
-        header = story_data[0]
-        rows = []
-        for r in story_data[1:]:
+    # Contact messages
+    cur.execute(
+        """
+        SELECT created_at, name, email, message
+        FROM contact_messages
+        ORDER BY created_at DESC
+        """
+    )
+    contact_rows = cur.fetchall()
+
+    # Casting submissions
+    cur.execute(
+        """
+        SELECT created_at, name, age, city, experience, profile_link
+        FROM casting_submissions
+        ORDER BY created_at DESC
+        """
+    )
+    casting_rows = cur.fetchall()
+
+    conn.close()
+
+    # Convert to list-of-lists (first row header, rest data) for template
+    story_data = []
+    if story_rows:
+        story_data.append(
+            ["Uploaded At", "Name", "Email", "Title", "Filename"]
+        )
+        for r in story_rows:
             try:
-                dt = datetime.fromisoformat(r[0])
-                r[0] = dt.strftime("%d %b %Y, %I:%M %p")
+                dt = datetime.fromisoformat(r["uploaded_at"])
+                nice_dt = dt.strftime("%d %b %Y, %I:%M %p")
             except Exception:
-                pass
-            rows.append(r)
-        story_data = [header] + rows
+                nice_dt = r["uploaded_at"]
+
+            story_data.append(
+                [nice_dt, r["name"], r["email"], r["title"], r["filename"]]
+            )
+
+    contact_data = []
+    if contact_rows:
+        contact_data.append(
+            ["Sent At", "Name", "Email", "Message"]
+        )
+        for r in contact_rows:
+            try:
+                dt = datetime.fromisoformat(r["created_at"])
+                nice_dt = dt.strftime("%d %b %Y, %I:%M %p")
+            except Exception:
+                nice_dt = r["created_at"]
+
+            contact_data.append(
+                [nice_dt, r["name"], r["email"], r["message"]]
+            )
+
+    casting_data = []
+    if casting_rows:
+        casting_data.append(
+            ["Submitted At", "Name", "Age", "City", "Experience", "Profile Link"]
+        )
+        for r in casting_rows:
+            try:
+                dt = datetime.fromisoformat(r["created_at"])
+                nice_dt = dt.strftime("%d %b %Y, %I:%M %p")
+            except Exception:
+                nice_dt = r["created_at"]
+
+            casting_data.append(
+                [nice_dt, r["name"], r["age"], r["city"], r["experience"], r["profile_link"]]
+            )
 
     return render_template(
         "admin_dashboard.html",
@@ -328,7 +463,7 @@ def admin_dashboard():
 
 
 # ==========================================================
-# ADMIN CSV DOWNLOAD
+# ADMIN CSV DOWNLOAD (FROM DB)
 # ==========================================================
 
 @app.route("/admin/download/<kind>")
@@ -336,17 +471,64 @@ def admin_download(kind):
     if not session.get("admin"):
         return redirect("/admin/login")
 
-    mapping = {
-        "stories": "story_submissions.csv",
-        "contact": "contact_data.csv",
-        "casting": "casting_data.csv",
-    }
+    conn = get_db()
+    cur = conn.cursor()
 
-    filename = mapping.get(kind)
-    if not filename or not os.path.exists(filename):
-        return "No data file found.", 404
+    if kind == "stories":
+        cur.execute(
+            """
+            SELECT uploaded_at, name, email, title, filename
+            FROM story_uploads
+            ORDER BY uploaded_at DESC
+            """
+        )
+        rows = cur.fetchall()
+        header = ["Uploaded At", "Name", "Email", "Title", "Filename"]
+        filename = "story_uploads.csv"
 
-    return send_file(filename, as_attachment=True)
+    elif kind == "contact":
+        cur.execute(
+            """
+            SELECT created_at, name, email, message
+            FROM contact_messages
+            ORDER BY created_at DESC
+            """
+        )
+        rows = cur.fetchall()
+        header = ["Sent At", "Name", "Email", "Message"]
+        filename = "contact_messages.csv"
+
+    elif kind == "casting":
+        cur.execute(
+            """
+            SELECT created_at, name, age, city, experience, profile_link
+            FROM casting_submissions
+            ORDER BY created_at DESC
+            """
+        )
+        rows = cur.fetchall()
+        header = ["Submitted At", "Name", "Age", "City", "Experience", "Profile Link"]
+        filename = "casting_submissions.csv"
+
+    else:
+        conn.close()
+        return "Unknown data type", 400
+
+    # Generate CSV in memory
+    output = io.StringIO()
+    writer = csv.writer(output)
+    writer.writerow(header)
+    for r in rows:
+        writer.writerow(list(r))
+
+    conn.close()
+
+    csv_data = output.getvalue()
+    output.close()
+
+    resp = Response(csv_data, mimetype="text/csv")
+    resp.headers["Content-Disposition"] = f"attachment; filename={filename}"
+    return resp
 
 
 # ==========================================================
@@ -355,4 +537,3 @@ def admin_download(kind):
 
 if __name__ == "__main__":
     app.run(debug=True)
-
