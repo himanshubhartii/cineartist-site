@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ story.title }} | CineArtist Story</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=9">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">CineArtist</div>
+
+    <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <nav class="nav-links">
+        <a href="/" class="{% if request.path == '/' %}active{% endif %}">Home</a>
+        <a href="/about">About</a>
+        <a href="/films">Films</a>
+        <a href="/stories" class="active">Stories</a>
+        <a href="/casting">Casting</a>
+        <a href="/contact">Contact</a>
+    </nav>
+</header>
+
+<main class="page story-detail-page">
+    <h1>{{ story.title }}</h1>
+
+    <div class="story-body">
+        {% for para in story.full %}
+            <p>{{ para }}</p>
+        {% endfor %}
+    </div>
+
+    <a href="{{ url_for('stories') }}" class="btn-secondary" style="margin-top:20px; display:inline-block;">
+        ← Back to Stories
+    </a>
+</main>
+
+<footer class="footer">
+    <div class="social-icons">
+        <a href="https://instagram.com/cineartist_?igsh=MXM2eWI0d2Z3bG5iYQ==" target="_blank" class="icon">
+            <!-- instagram svg (same as other pages) -->
+        </a>
+        <a href="https://youtube.com/@CineArtist_" target="_blank" class="icon">
+            <!-- youtube svg (same as other pages) -->
+        </a>
+    </div>
+    © 2025 CineArtist • Short Films & Stories
+</footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggle = document.querySelector(".nav-toggle");
+        const navbar = document.querySelector(".navbar");
+
+        if (toggle && navbar) {
+            toggle.addEventListener("click", function () {
+                navbar.classList.toggle("open");
+            });
+        }
+    });
+</script>
+
+</body>
+</html>
