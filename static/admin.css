@@ -1,11 +1,10 @@
 /* ============================
-   ADMIN PANEL – LAYOUT
-   (Only for /admin pages)
+   ADMIN PANEL – BASE
 ============================ */
 
 body {
-    /* main site already sets dark bg, ye sirf ensure karne ke liye */
     background: #030309;
+    color: white;
 }
 
 .admin-page {
@@ -14,7 +13,9 @@ body {
     padding: 24px 5%;
 }
 
-/* Header row */
+/* ============================
+   HEADER
+============================ */
 .admin-header-row {
     display: flex;
     justify-content: space-between;
@@ -35,12 +36,11 @@ body {
 
 .admin-header-actions {
     display: flex;
+    gap: 10px;
     flex-wrap: wrap;
-    gap: 8px;
-    justify-content: flex-end;
 }
 
-/* Buttons override (use existing .btn-secondary styles from style.css) */
+/* Buttons */
 .small-btn {
     padding: 6px 14px;
     font-size: 0.8rem;
@@ -51,50 +51,56 @@ body {
     font-size: 0.75rem;
 }
 
-/* Section spacing */
+/* ============================
+   SECTION
+============================ */
 .admin-section {
-    margin-top: 22px;
+    margin-top: 35px;
 }
 
-.admin-section h2 {
-    margin-bottom: 2px;
-}
-
-.admin-section-header p {
-    font-size: 0.88rem;
-    color: #b3b3c5;
-}
-
-/* Section header row (title + download button) */
 .admin-section-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 12px;
     margin-bottom: 6px;
+    gap: 10px;
 }
 
-/* TABLE WRAPPER (for mobile horizontal scroll) */
+.admin-section-header h2 {
+    margin: 0;
+}
+
+.admin-section-header p {
+    font-size: 0.9rem;
+    color: #b3b3c5;
+    margin-top: 4px;
+}
+
+/* ============================
+   TABLE WRAPPER
+============================ */
+
 .admin-table-wrapper {
     width: 100%;
     overflow-x: auto;
-    border-radius: 12px;
     border: 1px solid #262636;
+    border-radius: 14px;
+    margin-top: 10px;
 }
 
-/* Table styles */
 .admin-table {
     width: 100%;
     border-collapse: collapse;
     background: #0d0e16;
     font-size: 0.85rem;
+    min-width: 600px; /* <-- ensures readability on mobile */
 }
 
 .admin-table td {
-    padding: 8px 10px;
+    padding: 10px 12px;
     border-bottom: 1px solid #2b2b39;
+    white-space: nowrap;  /* <--- makes table scroll instead of breaking text */
     color: #ddd;
-    white-space: nowrap; /* better for horizontal scroll on phone */
 }
 
 .admin-table tr:nth-child(1) td {
@@ -106,34 +112,35 @@ body {
     background: #10111c;
 }
 
-/* Empty message */
 .admin-empty {
-    font-size: 0.9rem;
-    color: #999;
-    margin: 6px 0 18px 0;
+    font-size: 0.95rem;
+    color: #aaa;
+    margin-top: 8px;
     font-style: italic;
 }
 
 /* ============================
-   RESPONSIVE – MOBILE
+   MOBILE RESPONSIVE
 ============================ */
 
-@media (max-width: 800px) {
+@media (max-width: 850px) {
+    
     .admin-page {
-        padding: 18px 4%;
+        padding: 20px 4%;
     }
 
     .admin-header-row {
         flex-direction: column;
         align-items: flex-start;
+        gap: 8px;
     }
 
     .admin-title {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
     }
 
     .admin-subtitle {
-        font-size: 0.82rem;
+        font-size: 0.85rem;
     }
 
     .admin-header-actions {
@@ -144,24 +151,40 @@ body {
     .admin-section-header {
         flex-direction: column;
         align-items: flex-start;
+        gap: 6px;
     }
 
     .admin-section-header p {
-        font-size: 0.8rem;
+        font-size: 0.82rem;
     }
 
     .admin-table td {
-        padding: 6px 8px;
-        font-size: 0.78rem;
+        padding: 8px 10px;
+        font-size: 0.82rem;
+    }
+
+    .tiny-btn {
+        font-size: 0.75rem;
+        padding: 5px 12px;
     }
 
     .small-btn {
         font-size: 0.78rem;
-        padding: 5px 12px;
+        padding: 6px 14px;
+    }
+}
+
+/* Ultra small screens */
+@media (max-width: 480px) {
+    .admin-title {
+        font-size: 1.4rem;
     }
 
-    .tiny-btn {
-        font-size: 0.72rem;
-        padding: 4px 10px;
+    .admin-table {
+        min-width: 500px;
+    }
+
+    .admin-table td {
+        padding: 7px 9px;
     }
 }
