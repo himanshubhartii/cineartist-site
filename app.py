@@ -7,7 +7,7 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
-# ---------- FILE UPLOAD SETTINGS (for stories) ----------
+# ---------- FILE UPLOAD SETTINGS ----------
 BASE_DIR = os.path.dirname(__file__)
 UPLOAD_FOLDER = os.path.join(BASE_DIR, "uploads", "stories")
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -25,14 +25,12 @@ def append_to_csv(filename, header_row, data_row):
 
     with open(filename, "a", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
-
         if not file_exists:
             writer.writerow(header_row)
-
         writer.writerow(data_row)
 
 
-# ---------- STATIC STORY DATA ----------
+# ---------- STORY DATABASE WITH TAGS ----------
 STORIES = [
     {
         "slug": "papa-beta-aur-ek-sapna",
@@ -48,6 +46,7 @@ STORIES = [
             "The story follows their emotional conversation where, for the first time, both of them "
             "talk openly about fear, dreams and expectations."
         ],
+        "tags": ["Family", "Emotional", "Drama"],
     },
     {
         "slug": "deadline",
@@ -58,35 +57,38 @@ STORIES = [
             "When one missed call changes everything, he starts questioning what ‘success’ really means.",
             "The story explores burnout, expectations and the cost of ignoring yourself."
         ],
+        "tags": ["Corporate", "Mental Health"],
     },
     {
         "slug": "last-bench",
         "title": "Last Bench",
         "short": "School memories, friendships and the people we lose touch with.",
         "full": [
-            "A reunion party makes an introvert remember his school days — and the last-bench friends "
-            "who gave him confidence.",
-            "As he scrolls through old photos and chat archives, he realises how quietly people drift apart.",
-            "The story is about one message he finally decides to send after years of silence."
+            "A reunion brings an introvert face-to-face with memories of old school friends.",
+            "Scrolling through old photos makes him wonder how easily people drift apart.",
+            "The story is about one text he finally sends after years of silence."
         ],
+        "tags": ["Friendship", "Nostalgia"],
     },
     {
         "slug": "parallel-festival",
         "title": "Parallel Festival",
         "short": "What if festivals were celebrated in a completely different world?",
         "full": [
-            "Two parallel versions of the same family celebrate the same festival — one with money, one without.",
-            "The story cuts between both worlds to show how love, not budget, decides the warmth of a festival."
+            "Two versions of the same family celebrate a festival — one rich, one struggling.",
+            "The contrast shows that love defines happiness, not budget."
         ],
+        "tags": ["Fantasy", "Emotion"],
     },
     {
         "slug": "unsent-messages",
         "title": "Unsent Messages",
         "short": "All the things we type on our phone… and never press send.",
         "full": [
-            "A character writes long heartfelt messages to people but always saves them in drafts.",
-            "One night, by mistake, all drafts get sent — and honest chaos begins.",
+            "A character writes long emotional messages but never sends them.",
+            "One night, due to a mistake, all those drafts get delivered.",
         ],
+        "tags": ["Drama", "Relationships"],
     },
     {
         "slug": "invisible-hero",
@@ -94,13 +96,14 @@ STORIES = [
         "short": "The unnoticed person in every family who quietly keeps everyone together.",
         "full": [
             "Every family has someone who wakes up first and sleeps last.",
-            "This story shows that ‘hero’ from the point of view of each family member.",
+            "This story shows that person from each family member’s perspective."
         ],
+        "tags": ["Family", "Slice of Life"],
     },
 ]
 
 
-# ---------- Routes ----------
+# ---------- ROUTES ----------
 @app.route("/")
 def home():
     latest_film = {
@@ -125,23 +128,22 @@ def films():
 @app.route("/stories", methods=["GET", "POST"])
 def stories():
     if request.method == "POST":
-        name = request.form.get("name", "").strip()
-        email = request.form.get("email", "").strip()
-        title = request.form.get("title", "").strip()
+        name = request.form.get("name", "")
+        email = request.form.get("email", "")
+        title = request.form.get("title", "")
         file = request.files.get("file")
 
         msg = None
 
-        if not file or file.filename == "":
+        if not file:
             msg = "Please attach a PDF or DOCX file."
         elif not allowed_file(file.filename):
-            msg = "Only PDF, DOC and DOCX files are allowed."
+            msg = "Only PDF, DOC, or DOCX files are allowed."
         else:
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             safe_name = secure_filename(file.filename)
             filename = f"{timestamp}_{safe_name}"
-            save_path = os.path.join(UPLOAD_FOLDER, filename)
-            file.save(save_path)
+            file.save(os.path.join(UPLOAD_FOLDER, filename))
 
             append_to_csv(
                 "story_submissions.csv",
@@ -153,11 +155,10 @@ def stories():
 
         return render_template("stories.html", stories=STORIES, upload_message=msg)
 
-    # GET
     return render_template("stories.html", stories=STORIES, upload_message=None)
 
 
-# ---------- SINGLE STORY DETAIL ----------
+# ---------- STORY DETAIL ----------
 @app.route("/stories/<slug>")
 def story_detail(slug):
     story = next((s for s in STORIES if s["slug"] == slug), None)
@@ -170,11 +171,11 @@ def story_detail(slug):
 @app.route("/casting", methods=["GET", "POST"])
 def casting():
     if request.method == "POST":
-        name = request.form.get("name", "").strip()
-        age = request.form.get("age", "").strip()
-        city = request.form.get("city", "").strip()
-        experience = request.form.get("experience", "").strip()
-        profile_link = request.form.get("profile_link", "").strip()
+        name = request.form.get("name", "")
+        age = request.form.get("age", "")
+        city = request.form.get("city", "")
+        experience = request.form.get("experience", "")
+        profile_link = request.form.get("profile_link", "")
 
         append_to_csv(
             "casting_data.csv",
@@ -195,9 +196,9 @@ def casting():
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
-        name = request.form.get("name", "").strip()
-        email = request.form.get("email", "").strip()
-        message = request.form.get("message", "").strip()
+        name = request.form.get("name", "")
+        email = request.form.get("email", "")
+        message = request.form.get("message", "")
 
         append_to_csv(
             "contact_data.csv",
