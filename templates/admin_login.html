@@ -1,9 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Admin Login | CineArtist</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=11">
+    <meta charset="UTF-8">
+    <title>Admin Panel | CineArtist</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+
+    <!-- Main site styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=13">
+    <!-- Extra styles only for admin panel -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}?v=1">
 </head>
+
 <body>
 
 <div class="page" style="max-width:400px;margin:auto;margin-top:60px;">
