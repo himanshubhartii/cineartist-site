@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CineArtist | Stories</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=5">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=9">
 </head>
 <body>
 
@@ -29,15 +29,19 @@
     </nav>
 </header>
 
+<main class="page stories-page">
 
-<main class="page">
-    <h1>Stories</h1>
-    <p>Concepts, scripts and story ideas from the CineArtist universe.</p>
+    <h1>Stories & Concepts</h1>
+    <p>
+        Ideas, scripts and concepts from the CineArtist universe – some already filmed,
+        some still waiting to become a short film.
+    </p>
 
+    <!-- Ready-made story concept cards -->
     <div class="card-grid">
         <article class="card">
             <h2>Papa, Beta aur Ek Sapna</h2>
-            <p>A father silently sacrifices his dreams so his son can chase his own.</p>
+            <p>A father silently sacrificing his dreams so his son can chase his own.</p>
         </article>
 
         <article class="card">
@@ -47,17 +51,53 @@
 
         <article class="card">
             <h2>Last Bench</h2>
-            <p>School memories, friendships and the people we forget after the last bell.</p>
+            <p>School memories, friendships and the people we lose touch with.</p>
         </article>
 
         <article class="card">
             <h2>Parallel Festival</h2>
-            <p>What if festivals happened in a completely different version of our world?</p>
+            <p>What if festivals were celebrated in a completely different world?</p>
+        </article>
+
+        <article class="card">
+            <h2>Unsent Messages</h2>
+            <p>All the things we type on our phone… and never press send.</p>
+        </article>
+
+        <article class="card">
+            <h2>Invisible Hero</h2>
+            <p>The unnoticed person in every family who quietly keeps everyone together.</p>
         </article>
     </div>
+
+    <!-- USER STORY UPLOAD SECTION -->
+    <section class="upload-section">
+        <h2>Share Your Story</h2>
+        <p class="upload-info">
+            Agar aapke paas koi kahani, concept ya short film ka idea hai,  
+            aap uska script / outline yahan se upload kar sakte hain (PDF / DOCX).
+        </p>
+
+        <form class="form upload-form" action="/stories" method="POST" enctype="multipart/form-data">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+            <input type="text" name="title" placeholder="Story Title" required>
+
+            <input type="file" name="file"
+                   accept=".pdf,.doc,.docx"
+                   required>
+
+            <button type="submit" class="btn-primary">Upload Story File</button>
+        </form>
+
+        {% if upload_message %}
+            <p class="upload-message">{{ upload_message }}</p>
+        {% endif %}
+    </section>
+
 </main>
 
-<<footer class="footer">
+<footer class="footer">
 
     <div class="social-icons">
 
@@ -92,6 +132,7 @@
 
     © 2025 CineArtist • Short Films & Stories
 </footer>
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const toggle = document.querySelector(".nav-toggle");
@@ -105,9 +146,5 @@
     });
 </script>
 
-
 </body>
 </html>
-
-
-
