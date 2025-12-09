@@ -13,7 +13,8 @@
 <body>
 
 <header class="navbar">
-    <div class="logo">CineArtist</div>
+    <!-- Logo now clickable and slightly bigger -->
+    <a href="/" class="logo">CineArtist</a>
 
     <button class="nav-toggle" aria-label="Toggle navigation">
         <span></span>
@@ -22,14 +23,15 @@
     </button>
 
     <nav class="nav-links">
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/films">Films</a>
-        <a href="/stories">Stories</a>
-        <a href="/casting" class="active">Casting</a>
-        <a href="/contact">Contact</a>
+        <a href="/" class="{% if request.path == '/' %}active{% endif %}">Home</a>
+        <a href="/about" class="{% if request.path.startswith('/about') %}active{% endif %}">About</a>
+        <a href="/films" class="{% if request.path.startswith('/films') %}active{% endif %}">Films</a>
+        <a href="/stories" class="{% if request.path.startswith('/stories') %}active{% endif %}">Stories</a>
+        <a href="/casting" class="{% if request.path.startswith('/casting') %}active{% endif %}">Casting</a>
+        <a href="/contact" class="{% if request.path.startswith('/contact') %}active{% endif %}">Contact</a>
     </nav>
 </header>
+
 
 <main class="page">
     <h1>Casting & Auditions</h1>
@@ -93,5 +95,6 @@
 
 </body>
 </html>
+
 
 
