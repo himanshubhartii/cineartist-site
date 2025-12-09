@@ -628,6 +628,158 @@ body {
 .about-journey li {
     margin-bottom: 8px;
 }
+/* ================================
+   ABOUT PAGE
+================================ */
+.about-hero {
+    background: radial-gradient(circle at top, #171726, #05050b);
+    border-bottom: 1px solid #181824;
+}
+
+.about-hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 7% 28px 7%;
+}
+
+.about-hero-inner h1 {
+    font-size: 2.4rem;
+    margin-bottom: 8px;
+}
+
+.about-hero-inner p {
+    color: #d0d0d0;
+    font-size: 0.98rem;
+}
+
+/* layout under hero */
+.about-page {
+    padding-top: 32px;
+    padding-bottom: 40px;
+}
+
+/* story + side card layout */
+.about-layout {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr;
+    gap: 26px;
+    margin-bottom: 40px;
+}
+
+.about-text p {
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
+/* side card */
+.about-side-card {
+    background: #0d0e16;
+    border-radius: 16px;
+    border: 1px solid #272738;
+    padding: 18px;
+    box-shadow: 0 10px 26px rgba(0,0,0,0.5);
+}
+
+.about-side-card h3 {
+    margin-bottom: 10px;
+}
+
+/* sections under it */
+.about-section {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.about-section h2 {
+    margin-bottom: 10px;
+}
+
+/* Timeline */
+.timeline {
+    border-left: 2px solid #2e2e3f;
+    padding-left: 16px;
+    margin-top: 10px;
+}
+
+.timeline-item {
+    margin-bottom: 12px;
+}
+
+.time-label {
+    font-size: 0.85rem;
+    color: #ffb347;
+    display: inline-block;
+    margin-bottom: 3px;
+}
+
+/* Stats */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 10px;
+}
+
+.stat-card {
+    background: #0d0e16;
+    border-radius: 14px;
+    border: 1px solid #262636;
+    padding: 16px;
+    font-size: 0.9rem;
+}
+
+/* Skills */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.skill-item {
+    background: #11121a;
+    border-radius: 999px;
+    border: 1px solid #26263a;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+/* CTA */
+.about-cta {
+    text-align: center;
+    margin-top: 32px;
+}
+
+.about-cta-buttons {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* Responsive for ABOUT */
+@media (max-width: 900px) {
+    .about-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 
 
 
