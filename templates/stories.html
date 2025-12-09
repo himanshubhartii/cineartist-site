@@ -38,37 +38,19 @@
     </p>
 
     <!-- Ready-made story concept cards -->
+       <!-- Ready-made story concept cards -->
     <div class="card-grid">
-        <article class="card">
-            <h2>Papa, Beta aur Ek Sapna</h2>
-            <p>A father silently sacrificing his dreams so his son can chase his own.</p>
+        {% for story in stories %}
+        <article class="card story-card">
+            <h2>{{ story.title }}</h2>
+            <p>{{ story.short }}</p>
+            <a href="{{ url_for('story_detail', slug=story.slug) }}" class="story-link">
+                Read full story →
+            </a>
         </article>
-
-        <article class="card">
-            <h2>Deadline</h2>
-            <p>A young professional stuck between office targets and mental peace.</p>
-        </article>
-
-        <article class="card">
-            <h2>Last Bench</h2>
-            <p>School memories, friendships and the people we lose touch with.</p>
-        </article>
-
-        <article class="card">
-            <h2>Parallel Festival</h2>
-            <p>What if festivals were celebrated in a completely different world?</p>
-        </article>
-
-        <article class="card">
-            <h2>Unsent Messages</h2>
-            <p>All the things we type on our phone… and never press send.</p>
-        </article>
-
-        <article class="card">
-            <h2>Invisible Hero</h2>
-            <p>The unnoticed person in every family who quietly keeps everyone together.</p>
-        </article>
+        {% endfor %}
     </div>
+
 
     <!-- USER STORY UPLOAD SECTION -->
     <section class="upload-section">
@@ -148,3 +130,4 @@
 
 </body>
 </html>
+
