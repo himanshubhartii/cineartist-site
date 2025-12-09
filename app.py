@@ -2,7 +2,7 @@ import os
 import csv
 from datetime import datetime
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, abort
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
@@ -32,10 +32,77 @@ def append_to_csv(filename, header_row, data_row):
         writer.writerow(data_row)
 
 
+# ---------- STATIC STORY DATA ----------
+STORIES = [
+    {
+        "slug": "papa-beta-aur-ek-sapna",
+        "title": "Papa, Beta aur Ek Sapna",
+        "short": "A father silently sacrificing his dreams so his son can chase his own.",
+        "full": [
+            "A middle-class father works extra hours so his son can study in a better school. "
+            "He never talks about his own unfulfilled dreams of becoming an artist.",
+
+            "One day, the son discovers his father’s old sketchbook and realises that the life "
+            "he is living today is built on the dreams his father quietly gave up.",
+
+            "The story follows their emotional conversation where, for the first time, both of them "
+            "talk openly about fear, dreams and expectations."
+        ],
+    },
+    {
+        "slug": "deadline",
+        "title": "Deadline",
+        "short": "A young professional stuck between office targets and mental peace.",
+        "full": [
+            "A first-job employee keeps chasing deadlines, ignoring his friends, health and family.",
+            "When one missed call changes everything, he starts questioning what ‘success’ really means.",
+            "The story explores burnout, expectations and the cost of ignoring yourself."
+        ],
+    },
+    {
+        "slug": "last-bench",
+        "title": "Last Bench",
+        "short": "School memories, friendships and the people we lose touch with.",
+        "full": [
+            "A reunion party makes an introvert remember his school days — and the last-bench friends "
+            "who gave him confidence.",
+            "As he scrolls through old photos and chat archives, he realises how quietly people drift apart.",
+            "The story is about one message he finally decides to send after years of silence."
+        ],
+    },
+    {
+        "slug": "parallel-festival",
+        "title": "Parallel Festival",
+        "short": "What if festivals were celebrated in a completely different world?",
+        "full": [
+            "Two parallel versions of the same family celebrate the same festival — one with money, one without.",
+            "The story cuts between both worlds to show how love, not budget, decides the warmth of a festival."
+        ],
+    },
+    {
+        "slug": "unsent-messages",
+        "title": "Unsent Messages",
+        "short": "All the things we type on our phone… and never press send.",
+        "full": [
+            "A character writes long heartfelt messages to people but always saves them in drafts.",
+            "One night, by mistake, all drafts get sent — and honest chaos begins.",
+        ],
+    },
+    {
+        "slug": "invisible-hero",
+        "title": "Invisible Hero",
+        "short": "The unnoticed person in every family who quietly keeps everyone together.",
+        "full": [
+            "Every family has someone who wakes up first and sleeps last.",
+            "This story shows that ‘hero’ from the point of view of each family member.",
+        ],
+    },
+]
+
+
 # ---------- Routes ----------
 @app.route("/")
 def home():
-    # yahan future me tum latest film change kar sakte ho
     latest_film = {
         "title": "Lamhey",
         "url": "https://www.youtube.com/watch?v=H0Oi7bGxHS4",
@@ -54,7 +121,7 @@ def films():
     return render_template("films.html")
 
 
-# ---------- STORIES (WITH FILE UPLOAD) ----------
+# ---------- STORIES (LIST + UPLOAD) ----------
 @app.route("/stories", methods=["GET", "POST"])
 def stories():
     if request.method == "POST":
@@ -70,14 +137,12 @@ def stories():
         elif not allowed_file(file.filename):
             msg = "Only PDF, DOC and DOCX files are allowed."
         else:
-            # safe filename + timestamp
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             safe_name = secure_filename(file.filename)
             filename = f"{timestamp}_{safe_name}"
             save_path = os.path.join(UPLOAD_FOLDER, filename)
             file.save(save_path)
 
-            # CSV me entry save karo
             append_to_csv(
                 "story_submissions.csv",
                 ["Uploaded At", "Name", "Email", "Title", "Filename"],
@@ -86,10 +151,19 @@ def stories():
 
             msg = "Thank you! Your story has been uploaded."
 
-        return render_template("stories.html", upload_message=msg)
+        return render_template("stories.html", stories=STORIES, upload_message=msg)
 
-    # GET request
-    return render_template("stories.html", upload_message=None)
+    # GET
+    return render_template("stories.html", stories=STORIES, upload_message=None)
+
+
+# ---------- SINGLE STORY DETAIL ----------
+@app.route("/stories/<slug>")
+def story_detail(slug):
+    story = next((s for s in STORIES if s["slug"] == slug), None)
+    if not story:
+        abort(404)
+    return render_template("story_detail.html", story=story)
 
 
 # ---------- CASTING ----------
