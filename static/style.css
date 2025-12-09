@@ -877,6 +877,104 @@ body {
 .admin-table tr:nth-child(even) {
     background: #10111c;
 }
+/* ========== ADMIN TABLE POLISH ========== */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    background: #0d0e16;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 0.85rem;
+}
+
+.admin-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #2b2b39;
+    color: #ddd;
+}
+
+.admin-table tr:nth-child(1) td {
+    background: #18182a;
+    font-weight: 600;
+}
+
+.admin-table tr:nth-child(even) td {
+    background: #10111c;
+}
+
+.admin-empty {
+    font-size: 0.9rem;
+    color: #999;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.admin-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #bbb;
+    margin-bottom: 6px;
+}
+
+.small-btn {
+    padding: 6px 14px;
+    font-size: 0.8rem;
+}
+
+.tiny-btn {
+    padding: 4px 10px;
+    font-size: 0.75rem;
+}
+
+/* ========== FILM TAGS ========== */
+.film-tags {
+    margin-top: 4px;
+}
+
+.film-tag {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 999px;
+    border: 1px solid #33344a;
+    font-size: 0.7rem;
+    margin-right: 6px;
+    margin-top: 4px;
+    color: #dcdcdc;
+}
+
+/* ========== CASTING LAYOUT ========== */
+.casting-layout {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 24px;
+    margin-top: 20px;
+}
+
+.casting-info {
+    font-size: 0.9rem;
+    color: #d0d0d0;
+}
+
+.casting-info ul {
+    margin-top: 8px;
+    margin-left: 16px;
+}
+
+.casting-info li {
+    margin-bottom: 4px;
+}
+
+/* responsive casting */
+@media (max-width: 900px) {
+    .casting-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
 
 
 
