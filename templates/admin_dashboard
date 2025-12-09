@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel | CineArtist</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=11">
+</head>
+<body>
+
+<div class="page">
+    <h1>CineArtist Admin Panel</h1>
+    <a href="/admin/logout" class="btn-secondary" style="float:right;">Logout</a>
+
+    <h2>Story Uploads</h2>
+    <table class="admin-table">
+        {% for row in story_data %}
+            <tr>
+                {% for col in row %}
+                <td>{{ col }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Contact Messages</h2>
+    <table class="admin-table">
+        {% for row in contact_data %}
+        <tr>
+            {% for col in row %}
+            <td>{{ col }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Casting Applications</h2>
+    <table class="admin-table">
+        {% for row in casting_data %}
+        <tr>
+            {% for col in row %}
+            <td>{{ col }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
+
+</body>
+</html>
