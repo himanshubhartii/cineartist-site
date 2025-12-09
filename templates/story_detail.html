@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ story.title }} | CineArtist Story</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=9">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=10">
 </head>
 <body>
 
@@ -27,9 +27,23 @@
     </nav>
 </header>
 
-<main class="page story-detail-page">
-    <h1>{{ story.title }}</h1>
+<!-- Story Hero -->
+<section class="story-hero">
+    <div class="story-hero-inner">
+        <p class="story-label">CineArtist Story</p>
+        <h1>{{ story.title }}</h1>
 
+        {% if story.tags %}
+        <div class="story-tags">
+            {% for tag in story.tags %}
+                <span class="story-tag">{{ tag }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<main class="page story-detail-page">
     <div class="story-body">
         {% for para in story.full %}
             <p>{{ para }}</p>
@@ -43,13 +57,36 @@
 
 <footer class="footer">
     <div class="social-icons">
+        <!-- Instagram -->
         <a href="https://instagram.com/cineartist_?igsh=MXM2eWI0d2Z3bG5iYQ==" target="_blank" class="icon">
-            <!-- instagram svg (same as other pages) -->
+            <!-- same SVG as other pages -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24">
+                <path fill="currentColor"
+                      d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 
+                         0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm10 2c1.654 0 3 1.346 3 
+                         3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 
+                         1.346-3 3-3h10zm-5 3c-2.757 0-5 2.243-5 5s2.243 5 5 5 
+                         5-2.243 5-5-2.243-5-5-5zm0 2c1.654 0 3 1.346 3 
+                         3s-1.346 3-3 3-3-1.346-3-3 1.346-3 3-3zm4.5-3a1.5 
+                         1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+            </svg>
         </a>
+
+        <!-- YouTube -->
         <a href="https://youtube.com/@CineArtist_" target="_blank" class="icon">
-            <!-- youtube svg (same as other pages) -->
+            <!-- same SVG as other pages -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+                <path fill="currentColor"
+                      d="M23.5 6.2s-.2-1.6-.8-2.3c-.8-.9-1.7-.9-2.1-1C17.3 
+                         2.5 12 2.5 12 2.5h-.1s-5.3 0-8.6.4c-.4.1-1.3.1-2.1 
+                         1-.6.7-.8 2.3-.8 2.3S0 8.1 0 10v1.9c0 1.9.2 3.8.2 
+                         3.8s.2 1.6.8 2.3c.8.9 1.9.9 2.4 1 1.7.2 7.1.4 7.1.4s5.3 
+                         0 8.6-.4c.4-.1 1.3-.1 2.1-1 .6-.7.8-2.3.8-2.3s.2-1.9.2-3.8V10c0-1.9-.2-3.8-.2-3.8zM9.7 
+                         14.7V8.8l5.7 3-5.7 2.9z"/>
+            </svg>
         </a>
     </div>
+
     © 2025 CineArtist • Short Films & Stories
 </footer>
 
