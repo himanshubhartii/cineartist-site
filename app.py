@@ -10,6 +10,7 @@ from flask import (
     session,
     redirect,
     url_for,
+    send_file,
 )
 from werkzeug.utils import secure_filename
 
@@ -295,21 +296,28 @@ def admin_dashboard():
     if not session.get("admin"):
         return redirect("/admin/login")
 
-    casting_data = []
-    contact_data = []
-    story_data = []
+    def safe_read(path):
+        if os.path.exists(path):
+            with open(path, newline="", encoding="utf-8") as f:
+                return list(csv.reader(f))
+        return []
 
-    if os.path.exists("casting_data.csv"):
-        with open("casting_data.csv", newline="", encoding="utf-8") as f:
-            casting_data = list(csv.reader(f))
+    casting_data = safe_read("casting_data.csv")
+    contact_data = safe_read("contact_data.csv")
+    story_data = safe_read("story_submissions.csv")
 
-    if os.path.exists("contact_data.csv"):
-        with open("contact_data.csv", newline="", encoding="utf-8") as f:
-            contact_data = list(csv.reader(f))
-
-    if os.path.exists("story_submissions.csv"):
-        with open("story_submissions.csv", newline="", encoding="utf-8") as f:
-            story_data = list(csv.reader(f))
+    # human readable date for story_data
+    if story_data:
+        header = story_data[0]
+        rows = []
+        for r in story_data[1:]:
+            try:
+                dt = datetime.fromisoformat(r[0])
+                r[0] = dt.strftime("%d %b %Y, %I:%M %p")
+            except Exception:
+                pass
+            rows.append(r)
+        story_data = [header] + rows
 
     return render_template(
         "admin_dashboard.html",
@@ -317,6 +325,28 @@ def admin_dashboard():
         contact_data=contact_data,
         story_data=story_data,
     )
+
+
+# ==========================================================
+# ADMIN CSV DOWNLOAD
+# ==========================================================
+
+@app.route("/admin/download/<kind>")
+def admin_download(kind):
+    if not session.get("admin"):
+        return redirect("/admin/login")
+
+    mapping = {
+        "stories": "story_submissions.csv",
+        "contact": "contact_data.csv",
+        "casting": "casting_data.csv",
+    }
+
+    filename = mapping.get(kind)
+    if not filename or not os.path.exists(filename):
+        return "No data file found.", 404
+
+    return send_file(filename, as_attachment=True)
 
 
 # ==========================================================
