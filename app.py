@@ -25,7 +25,7 @@ app.secret_key = "cineartist-secret-key"
 # ADMIN LOGIN CREDENTIALS
 # -------------------------
 ADMIN_USERNAME = "admin"
-ADMIN_PASSWORD = "cineartist123"
+ADMIN_PASSWORD = "Himanshu@cine123"
 
 # -------------------------
 # FILE UPLOAD SETTINGS
@@ -355,3 +355,4 @@ def admin_download(kind):
 
 if __name__ == "__main__":
     app.run(debug=True)
+
