@@ -37,19 +37,29 @@
         some still waiting to become a short film.
     </p>
 
-    <!-- Ready-made story concept cards -->
-       <!-- Ready-made story concept cards -->
+    
+          <!-- Ready-made story concept cards -->
     <div class="card-grid">
         {% for story in stories %}
         <article class="card story-card">
             <h2>{{ story.title }}</h2>
             <p>{{ story.short }}</p>
+
+            {% if story.tags %}
+            <div class="story-tags">
+                {% for tag in story.tags %}
+                    <span class="story-tag">{{ tag }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+
             <a href="{{ url_for('story_detail', slug=story.slug) }}" class="story-link">
                 Read full story →
             </a>
         </article>
         {% endfor %}
     </div>
+
 
 
     <!-- USER STORY UPLOAD SECTION -->
@@ -130,4 +140,5 @@
 
 </body>
 </html>
+
 
