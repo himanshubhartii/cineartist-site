@@ -1,0 +1,167 @@
+/* ============================
+   ADMIN PANEL – LAYOUT
+   (Only for /admin pages)
+============================ */
+
+body {
+    /* main site already sets dark bg, ye sirf ensure karne ke liye */
+    background: #030309;
+}
+
+.admin-page {
+    max-width: 1100px;
+    margin: 0 auto 40px auto;
+    padding: 24px 5%;
+}
+
+/* Header row */
+.admin-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.admin-title {
+    font-size: 2rem;
+    margin-bottom: 4px;
+}
+
+.admin-subtitle {
+    font-size: 0.9rem;
+    color: #b4b4c7;
+}
+
+.admin-header-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+/* Buttons override (use existing .btn-secondary styles from style.css) */
+.small-btn {
+    padding: 6px 14px;
+    font-size: 0.8rem;
+}
+
+.tiny-btn {
+    padding: 4px 10px;
+    font-size: 0.75rem;
+}
+
+/* Section spacing */
+.admin-section {
+    margin-top: 22px;
+}
+
+.admin-section h2 {
+    margin-bottom: 2px;
+}
+
+.admin-section-header p {
+    font-size: 0.88rem;
+    color: #b3b3c5;
+}
+
+/* Section header row (title + download button) */
+.admin-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 6px;
+}
+
+/* TABLE WRAPPER (for mobile horizontal scroll) */
+.admin-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid #262636;
+}
+
+/* Table styles */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #0d0e16;
+    font-size: 0.85rem;
+}
+
+.admin-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #2b2b39;
+    color: #ddd;
+    white-space: nowrap; /* better for horizontal scroll on phone */
+}
+
+.admin-table tr:nth-child(1) td {
+    background: #18182a;
+    font-weight: 600;
+}
+
+.admin-table tr:nth-child(even) td {
+    background: #10111c;
+}
+
+/* Empty message */
+.admin-empty {
+    font-size: 0.9rem;
+    color: #999;
+    margin: 6px 0 18px 0;
+    font-style: italic;
+}
+
+/* ============================
+   RESPONSIVE – MOBILE
+============================ */
+
+@media (max-width: 800px) {
+    .admin-page {
+        padding: 18px 4%;
+    }
+
+    .admin-header-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .admin-title {
+        font-size: 1.5rem;
+    }
+
+    .admin-subtitle {
+        font-size: 0.82rem;
+    }
+
+    .admin-header-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .admin-section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .admin-section-header p {
+        font-size: 0.8rem;
+    }
+
+    .admin-table td {
+        padding: 6px 8px;
+        font-size: 0.78rem;
+    }
+
+    .small-btn {
+        font-size: 0.78rem;
+        padding: 5px 12px;
+    }
+
+    .tiny-btn {
+        font-size: 0.72rem;
+        padding: 4px 10px;
+    }
+}
