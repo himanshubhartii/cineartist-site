@@ -2,10 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Panel | CineArtist</title><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
     <title>Admin Panel | CineArtist</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -98,7 +94,7 @@
         <div class="admin-section-header">
             <div>
                 <h2>Casting Applications</h2>
-            <p>Actors and applicants who filled the casting form.</p>
+                <p>Actors and applicants who filled the casting form.</p>
             </div>
             <a href="{{ url_for('admin_download', kind='casting') }}" class="btn-secondary tiny-btn">
                 Download CSV
@@ -121,95 +117,6 @@
         <p class="admin-empty">No casting applications yet.</p>
         {% endif %}
     </section>
-
-</div>
-
-</body>
-</html>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=12">
-</head>
-<body>
-
-<div class="page">
-    <h1>CineArtist Admin Panel</h1>
-
-    <a href="{{ url_for('admin_logout') }}" class="btn-secondary small-btn" style="float:right; margin-top:-32px;">
-        Logout
-    </a>
-
-    <!-- STORIES -->
-    <h2 style="margin-top:40px;">Story Uploads</h2>
-
-    <div class="admin-section-header">
-        <span>All uploaded story files (PDF / DOCX)</span>
-        <a href="{{ url_for('admin_download', kind='stories') }}" class="btn-secondary tiny-btn">
-            Download CSV
-        </a>
-    </div>
-
-    {% if story_data and story_data|length > 1 %}
-    <table class="admin-table">
-        {% for row in story_data %}
-            <tr>
-                {% for col in row %}
-                <td>{{ col }}</td>
-                {% endfor %}
-            </tr>
-        {% endfor %}
-    </table>
-    {% else %}
-    <p class="admin-empty">No story uploads yet.</p>
-    {% endif %}
-
-    <!-- CONTACT -->
-    <h2>Contact Messages</h2>
-
-    <div class="admin-section-header">
-        <span>Messages from the contact form</span>
-        <a href="{{ url_for('admin_download', kind='contact') }}" class="btn-secondary tiny-btn">
-            Download CSV
-        </a>
-    </div>
-
-    {% if contact_data and contact_data|length > 1 %}
-    <table class="admin-table">
-        {% for row in contact_data %}
-        <tr>
-            {% for col in row %}
-            <td>{{ col }}</td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-    </table>
-    {% else %}
-    <p class="admin-empty">No contact messages yet.</p>
-    {% endif %}
-
-    <!-- CASTING -->
-    <h2>Casting Applications</h2>
-
-    <div class="admin-section-header">
-        <span>Actors / applicants from the casting form</span>
-        <a href="{{ url_for('admin_download', kind='casting') }}" class="btn-secondary tiny-btn">
-            Download CSV
-        </a>
-    </div>
-
-    {% if casting_data and casting_data|length > 1 %}
-    <table class="admin-table">
-        {% for row in casting_data %}
-        <tr>
-            {% for col in row %}
-            <td>{{ col }}</td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-    </table>
-    {% else %}
-    <p class="admin-empty">No casting applications yet.</p>
-    {% endif %}
 
 </div>
 
