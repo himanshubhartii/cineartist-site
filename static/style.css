@@ -795,6 +795,70 @@ body {
     margin-bottom: 10px;
     font-size: 0.95rem;
 }
+.story-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.story-tags {
+    margin-top: 8px;
+    margin-bottom: 6px;
+}
+
+.story-tag {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 999px;
+    border: 1px solid #33344a;
+    font-size: 0.75rem;
+    margin-right: 6px;
+    margin-bottom: 4px;
+    color: #dcdcdc;
+}
+
+.story-link {
+    margin-top: 6px;
+    display: inline-block;
+    font-size: 0.88rem;
+    color: #ffb347;
+    text-decoration: none;
+}
+
+.story-link:hover {
+    text-decoration: underline;
+}
+
+/* Story detail hero */
+.story-hero {
+    background: radial-gradient(circle at top, #19192a, #05050b);
+    border-bottom: 1px solid #181824;
+}
+
+.story-hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 7% 22px 7%;
+}
+
+.story-hero-inner h1 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.story-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #b3b3c2;
+    margin-bottom: 4px;
+}
+
+.story-detail-page .story-body p {
+    margin-bottom: 10px;
+    font-size: 0.96rem;
+}
+
 
 
 
