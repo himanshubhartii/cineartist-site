@@ -2,111 +2,107 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CineArtist | Home</title>
+    <title>CineArtist | Stories</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
-    <!-- Styles -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=13">
-</head>
 
+    <meta name="description" content="Story concepts and scripts from the CineArtist universe – some already filmed, some still waiting to become short films.">
+
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=15">
+</head>
 <body>
 
+<header class="navbar">
+    <a href="/" class="logo">CineArtist</a>
 
+    <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
 
-<main class="page stories-page">
+    <nav class="nav-links">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/films">Films</a>
+        <a href="/stories" class="active">Stories</a>
+        <a href="/casting">Casting</a>
+        <a href="/contact">Contact</a>
+    </nav>
+</header>
 
-    <h1>Stories & Concepts</h1>
+<main class="page">
+    <h1>Stories &amp; Concepts</h1>
     <p>
         Ideas, scripts and concepts from the CineArtist universe – some already filmed,
         some still waiting to become a short film.
     </p>
 
-    
-          <!-- Ready-made story concept cards -->
-    <div class="card-grid">
-        {% for story in stories %}
-        <article class="card story-card">
-            <h2>{{ story.title }}</h2>
-            <p>{{ story.short }}</p>
+    <section class="story-grid">
 
-            {% if story.tags %}
-            <div class="story-tags">
-                {% for tag in story.tags %}
-                    <span class="story-tag">{{ tag }}</span>
-                {% endfor %}
-            </div>
-            {% endif %}
-
-            <a href="{{ url_for('story_detail', slug=story.slug) }}" class="story-link">
-                Read full story →
-            </a>
+        <article class="story-card">
+            <h2>Papa, Beta aur Ek Sapna</h2>
+            <p>A father silently sacrificing his dreams so his son can chase his own.</p>
+            <p class="story-meta">Family Emotional Drama</p>
+            <a href="/stories/papa-beta-aur-ek-sapna">Read full story →</a>
         </article>
-        {% endfor %}
-    </div>
 
+        <article class="story-card">
+            <h2>Deadline</h2>
+            <p>A young professional stuck between office targets and mental peace.</p>
+            <p class="story-meta">Corporate · Mental Health</p>
+            <a href="/stories/deadline">Read full story →</a>
+        </article>
 
+        <article class="story-card">
+            <h2>Last Bench</h2>
+            <p>School memories and friendships we lose touch with.</p>
+            <p class="story-meta">Friendship · Nostalgia</p>
+            <a href="/stories/last-bench">Read full story →</a>
+        </article>
 
-    <!-- USER STORY UPLOAD SECTION -->
-    <section class="upload-section">
+        <article class="story-card">
+            <h2>Parallel Festival</h2>
+            <p>What if festivals were celebrated differently in another world?</p>
+            <p class="story-meta">Fantasy · Emotion</p>
+            <a href="/stories/parallel-festival">Read full story →</a>
+        </article>
+
+        <article class="story-card">
+            <h2>Unsent Messages</h2>
+            <p>The things we type but never send.</p>
+            <p class="story-meta">Drama · Relationships</p>
+            <a href="/stories/unsent-messages">Read full story →</a>
+        </article>
+
+        <article class="story-card">
+            <h2>Invisible Hero</h2>
+            <p>The unnoticed person in every family who keeps it together.</p>
+            <p class="story-meta">Family · Slice of Life</p>
+            <a href="/stories/invisible-hero">Read full story →</a>
+        </article>
+
+    </section>
+
+    <!-- STORY UPLOAD FORM -->
+    <section style="margin-top:36px;">
         <h2>Share Your Story</h2>
-        <p class="upload-info">
-            Agar aapke paas koi kahani, concept ya short film ka idea hai,  
-            aap uska script / outline yahan se upload kar sakte hain (PDF / DOCX).
+        <p>
+            Agar aapke paas koi kahani, concept ya short film ka idea hai, aap uska script / outline
+            yahan se upload kar sakte hain (PDF / DOCX).
         </p>
 
-        <form class="form upload-form" action="/stories" method="POST" enctype="multipart/form-data">
+        <form class="form" action="/stories" method="post" enctype="multipart/form-data">
             <input type="text" name="name" placeholder="Your Name" required>
             <input type="email" name="email" placeholder="Email Address" required>
             <input type="text" name="title" placeholder="Story Title" required>
-
-            <input type="file" name="file"
-                   accept=".pdf,.doc,.docx"
-                   required>
-
-            <button type="submit" class="btn-primary">Upload Story File</button>
+            <input type="file" name="file" accept=".pdf,.doc,.docx" required>
+            <button type="submit" class="btn-primary">Upload Story</button>
         </form>
-
-        {% if upload_message %}
-            <p class="upload-message">{{ upload_message }}</p>
-        {% endif %}
     </section>
-
 </main>
 
 <footer class="footer">
-
-    <div class="social-icons">
-
-        <!-- Instagram -->
-        <a href="https://instagram.com/cineartist_?igsh=MXM2eWI0d2Z3bG5iYQ==" target="_blank" class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24">
-                <path fill="currentColor"
-                      d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 
-                         0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm10 2c1.654 0 3 1.346 3 
-                         3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 
-                         1.346-3 3-3h10zm-5 3c-2.757 0-5 2.243-5 5s2.243 5 5 5 
-                         5-2.243 5-5-2.243-5-5-5zm0 2c1.654 0 3 1.346 3 
-                         3s-1.346 3-3 3-3-1.346-3-3 1.346-3 3-3zm4.5-3a1.5 
-                         1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
-            </svg>
-        </a>
-
-        <!-- YouTube -->
-        <a href="https://youtube.com/@CineArtist_" target="_blank" class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
-                <path fill="currentColor"
-                      d="M23.5 6.2s-.2-1.6-.8-2.3c-.8-.9-1.7-.9-2.1-1C17.3 
-                         2.5 12 2.5 12 2.5h-.1s-5.3 0-8.6.4c-.4.1-1.3.1-2.1 
-                         1-.6.7-.8 2.3-.8 2.3S0 8.1 0 10v1.9c0 1.9.2 3.8.2 
-                         3.8s.2 1.6.8 2.3c.8.9 1.9.9 2.4 1 1.7.2 7.1.4 7.1.4s5.3 
-                         0 8.6-.4c.4-.1 1.3-.1 2.1-1 .6-.7.8-2.3.8-2.3s.2-1.9.2-3.8V10c0-1.9-.2-3.8-.2-3.8zM9.7 
-                         14.7V8.8l5.7 3-5.7 2.9z"/>
-            </svg>
-        </a>
-
-    </div>
-
     © 2025 CineArtist • Short Films & Stories
 </footer>
 
@@ -114,7 +110,6 @@
     document.addEventListener("DOMContentLoaded", function () {
         const toggle = document.querySelector(".nav-toggle");
         const navbar = document.querySelector(".navbar");
-
         if (toggle && navbar) {
             toggle.addEventListener("click", function () {
                 navbar.classList.toggle("open");
@@ -125,7 +120,3 @@
 
 </body>
 </html>
-
-
-
-
