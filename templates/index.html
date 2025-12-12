@@ -10,18 +10,6 @@
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=15">
 </head>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const toggle = document.querySelector(".nav-toggle");
-        const navbar = document.querySelector(".navbar");
-        if (toggle && navbar) {
-            toggle.addEventListener("click", function () {
-                navbar.classList.toggle("open");
-            });
-        }
-    });
-</script>
-
 <body>
 
 <header class="navbar">
