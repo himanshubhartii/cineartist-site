@@ -2,18 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CineArtist | Home</title>
+    <title>About | CineArtist</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
-    <!-- Styles -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=13">
-</head>
 
+    <meta name="description" content="How SANM Captures evolved into CineArtist – a small-town YouTube experiment that grew into a space for cinematic short films and emotional storytelling.">
+
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=15">
+</head>
 <body>
 
 <header class="navbar">
-    <!-- Logo now clickable and slightly bigger -->
     <a href="/" class="logo">CineArtist</a>
 
     <button class="nav-toggle" aria-label="Toggle navigation">
@@ -23,180 +22,96 @@
     </button>
 
     <nav class="nav-links">
-        <a href="/" class="{% if request.path == '/' %}active{% endif %}">Home</a>
-        <a href="/about" class="{% if request.path.startswith('/about') %}active{% endif %}">About</a>
-        <a href="/films" class="{% if request.path.startswith('/films') %}active{% endif %}">Films</a>
-        <a href="/stories" class="{% if request.path.startswith('/stories') %}active{% endif %}">Stories</a>
-        <a href="/casting" class="{% if request.path.startswith('/casting') %}active{% endif %}">Casting</a>
-        <a href="/contact" class="{% if request.path.startswith('/contact') %}active{% endif %}">Contact</a>
+        <a href="/">Home</a>
+        <a href="/about" class="active">About</a>
+        <a href="/films">Films</a>
+        <a href="/stories">Stories</a>
+        <a href="/casting">Casting</a>
+        <a href="/contact">Contact</a>
     </nav>
 </header>
 
-    <!-- Nav links -->
-    <nav class="nav-links">
-        <a href="/" class="{% if request.path == '/' %}active{% endif %}">Home</a>
-        <a href="/about" class="{% if request.path == '/about' %}active{% endif %}">About</a>
-        <a href="/films" class="{% if request.path == '/films' %}active{% endif %}">Films</a>
-        <a href="/stories" class="{% if request.path == '/stories' %}active{% endif %}">Stories</a>
-        <a href="/casting" class="{% if request.path == '/casting' %}active{% endif %}">Casting</a>
-        <a href="/contact" class="{% if request.path == '/contact' %}active{% endif %}">Contact</a>
-    </nav>
-</header>
+<main class="page">
 
-<!-- TOP HERO SECTION -->
-<section class="about-hero">
-    <div class="about-hero-inner">
-        <h1>About CineArtist</h1>
-        <p>
-            A small-town YouTube experiment that grew into a space for 
-            cinematic short films and emotional storytelling.
-        </p>
-    </div>
-</section>
+    <h1>About CineArtist</h1>
+    <p>
+        A small-town YouTube experiment that grew into a space for cinematic short films
+        and emotional storytelling.
+    </p>
 
-<main class="page about-page">
-
-    <!-- STORY BLOCK -->
-    <section class="about-layout">
-        <div class="about-text">
+    <section class="about-card" style="margin-top:26px;">
+        <div>
             <h2>Our Journey</h2>
-
             <p>
-                CineArtist originally started as <b>SANM Captures</b> — a small creative
-                attempt made in a small town with one simple aim: to tell stories that
-                felt honest, relatable and full of emotion.
+                CineArtist originally started as <strong>SANM Captures</strong> — a small creative attempt made
+                in a small town with one simple aim: to tell stories that felt honest, relatable and full of emotion.
             </p>
-
             <p>
-                With no professional camera or big setup, everything began with a basic
-                phone camera, homemade lighting and a passionate team experimenting
-                with short films after school, college and work. Slowly, people started
-                connecting with the raw, real-life inspired stories.
+                With no professional camera or big setup, everything began with a basic phone camera,
+                homemade lighting and a passionate team experimenting with short films after school, college
+                and work. Slowly, people started connecting with the raw, real-life inspired stories.
             </p>
-
             <p>
-                In <b>2024</b>, SANM Captures evolved into <b>CineArtist</b> — a name that
-                represents cinematic storytelling, simple visuals and expressive characters.
+                In <strong>2024</strong>, SANM Captures evolved into <strong>CineArtist</strong> — a name that represents cinematic
+                storytelling, simple visuals and expressive characters.
             </p>
-
             <p>
-                Today, CineArtist continues to create short films, stories and character
-                moments with the same belief:
-                <i>"Real emotions and simple visuals can touch people deeply."</i>
+                Today, CineArtist continues to create short films, stories and character moments with the same belief:
+                <em>"Real emotions and simple visuals can touch people deeply."</em>
             </p>
         </div>
 
-        <aside class="about-side-card">
+        <div class="about-right">
             <h3>From Then to Now</h3>
             <ul class="about-journey">
-                <li><b>Past:</b> Started as SANM Captures with a phone camera and homemade lights.</li>
-                <li><b>Place:</b> Born in a small-town environment full of real stories and real people.</li>
-                <li><b>2024:</b> Rebranded to CineArtist to expand creative vision.</li>
-                <li><b>Now:</b> A YouTube space for cinematic short films & emotional storytelling.</li>
+                <li><strong>Past:</strong> Started as SANM Captures with a phone camera and homemade lights.</li>
+                <li><strong>Place:</strong> Born in a small-town environment full of real stories and real people.</li>
+                <li><strong>2024:</strong> Rebranded to CineArtist to expand creative vision.</li>
+                <li><strong>Now:</strong> A YouTube space for cinematic short films &amp; emotional storytelling.</li>
             </ul>
-        </aside>
+        </div>
     </section>
 
-    <!-- TIMELINE -->
-    <section class="about-section">
+    <section style="margin-top:40px;">
         <h2>Timeline</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <span class="time-label">Early Days</span>
-                <p>Phone camera, borrowed lights, and late-night shoots with a small team.</p>
-            </div>
-            <div class="timeline-item">
-                <span class="time-label">SANM Captures</span>
-                <p>First short films uploaded, audience slowly started connecting to the stories.</p>
-            </div>
-            <div class="timeline-item">
-                <span class="time-label">2024 – CineArtist</span>
-                <p>Rebranded to CineArtist to move towards more focused cinematic storytelling.</p>
-            </div>
-            <div class="timeline-item">
-                <span class="time-label">Today</span>
-                <p>Short films, emotional stories and collaborations with new actors & creators.</p>
-            </div>
-        </div>
+
+        <p><strong>Early Days</strong><br>
+           Phone camera, borrowed lights, and late-night shoots with a small team.</p>
+
+        <p><strong>SANM Captures</strong><br>
+           First short films uploaded, audience slowly started connecting to the stories.</p>
+
+        <p><strong>2024 – CineArtist</strong><br>
+           Rebranded to move towards more focused cinematic storytelling.</p>
+
+        <p><strong>Today</strong><br>
+           Short films, emotional stories and collaborations with new actors &amp; creators.</p>
     </section>
 
-    <!-- STATS -->
-    <section class="about-section">
-        <h2>At a Glance</h2>
-        <div class="stats-grid">
-            <div class="stat-card">
-                <h3>Short Films</h3>
-                <p>Multiple films across emotion, drama and comedy.</p>
-            </div>
-            <div class="stat-card">
-                <h3>Genres</h3>
-                <p>Emotional stories, comedy sketches & slice-of-life moments.</p>
-            </div>
-            <div class="stat-card">
-                <h3>Focus</h3>
-                <p>Real characters, small moments and honest emotions.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- SKILLS / WHAT WE DO -->
-    <section class="about-section">
+    <section class="work-section">
         <h2>What Happens at CineArtist</h2>
-        <div class="skills-grid">
-            <div class="skill-item">Story & Concept</div>
-            <div class="skill-item">Writing & Direction</div>
-            <div class="skill-item">Cinematography</div>
-            <div class="skill-item">Performance & Acting</div>
-            <div class="skill-item">Editing & Sound</div>
-            <div class="skill-item">YouTube Content Strategy</div>
+        <div class="work-buttons">
+            <span class="btn-secondary">Story &amp; Concept</span>
+            <span class="btn-secondary">Writing &amp; Direction</span>
+            <span class="btn-secondary">Cinematography</span>
+            <span class="btn-secondary">Performance &amp; Acting</span>
+            <span class="btn-secondary">Editing &amp; Sound</span>
+            <span class="btn-secondary">YouTube Content Strategy</span>
         </div>
-    </section>
 
-    <!-- CTA -->
-    <section class="about-section about-cta">
-        <h2>Want to be a part of this journey?</h2>
-        <p>Actors, creators, brands – CineArtist is open for new collaborations.</p>
-        <div class="about-cta-buttons">
-            <a href="/casting" class="btn-primary">Casting / Auditions</a>
-            <a href="/contact" class="btn-secondary">Contact / Collaboration</a>
+        <h2 style="margin-top:30px;">Want to be a part of this journey?</h2>
+        <p style="margin-top:6px;">
+            Actors, creators, brands – CineArtist is open for new collaborations.
+        </p>
+        <div class="work-buttons">
+            <a href="/casting" class="btn-primary big-btn">Casting / Auditions</a>
+            <a href="/contact" class="btn-secondary big-btn">Contact / Collaboration</a>
         </div>
     </section>
 
 </main>
 
 <footer class="footer">
-
-    <div class="social-icons">
-
-        <!-- Instagram -->
-        <a href="https://instagram.com/cineartist_?igsh=MXM2eWI0d2Z3bG5iYQ==" target="_blank" class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24">
-                <path fill="currentColor"
-                      d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 
-                         0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm10 2c1.654 0 3 1.346 3 
-                         3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 
-                         1.346-3 3-3h10zm-5 3c-2.757 0-5 2.243-5 5s2.243 5 5 5 
-                         5-2.243 5-5-2.243-5-5-5zm0 2c1.654 0 3 1.346 3 
-                         3s-1.346 3-3 3-3-1.346-3-3 1.346-3 3-3zm4.5-3a1.5 
-                         1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
-            </svg>
-        </a>
-
-        <!-- YouTube -->
-        <a href="https://youtube.com/@CineArtist_" target="_blank" class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
-                <path fill="currentColor"
-                      d="M23.5 6.2s-.2-1.6-.8-2.3c-.8-.9-1.7-.9-2.1-1C17.3 
-                         2.5 12 2.5 12 2.5h-.1s-5.3 0-8.6.4c-.4.1-1.3.1-2.1 
-                         1-.6.7-.8 2.3-.8 2.3S0 8.1 0 10v1.9c0 1.9.2 3.8.2 
-                         3.8s.2 1.6.8 2.3c.8.9 1.9.9 2.4 1 1.7.2 7.1.4 7.1.4s5.3 
-                         0 8.6-.4c.4-.1 1.3-.1 2.1-1 .6-.7.8-2.3.8-2.3s.2-1.9.2-3.8V10c0-1.9-.2-3.8-.2-3.8zM9.7 
-                         14.7V8.8l5.7 3-5.7 2.9z"/>
-            </svg>
-        </a>
-
-    </div>
-
     © 2025 CineArtist • Short Films & Stories
 </footer>
 
@@ -204,7 +119,6 @@
     document.addEventListener("DOMContentLoaded", function () {
         const toggle = document.querySelector(".nav-toggle");
         const navbar = document.querySelector(".navbar");
-
         if (toggle && navbar) {
             toggle.addEventListener("click", function () {
                 navbar.classList.toggle("open");
@@ -215,5 +129,3 @@
 
 </body>
 </html>
-
-
