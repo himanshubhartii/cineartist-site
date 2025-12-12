@@ -720,40 +720,49 @@ p {
         min-width: 230px;
     }
 }
-/* FIX: Remove extra top space on Films & Stories pages */
-.page-title,
-.films-page,
+/* FIX: Navbar spacing for all pages */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Ensure main content always starts below navbar */
+main, .page, .films-page, .stories-page, .content-section {
+    padding-top: 90px !important;   /* same as navbar height */
+}
+
+/* Desktop fix: remove unwanted margin */
+.page-title {
+    margin-top: 0 !important;
+}
+
+/* FIX: Films page */
+.films-page {
+    margin-top: 0 !important;
+}
+
+/* FIX: Stories page */
 .stories-page {
     margin-top: 0 !important;
-    padding-top: 0 !important;
 }
 
-/* Ensure all section headers start right below navbar */
-section {
-    margin-top: 20px;
-}
-
-/* FIX: Mobile top gap under navbar */
+/* FIX: Mobile heading getting cut */
 @media (max-width: 768px) {
-    body {
-        padding-top: 0 !important;
-        margin-top: 0 !important;
-    }
-
-    .navbar {
-        margin-bottom: 0 !important;
-        padding-bottom: 0 !important;
-    }
 
     .films-page,
-    .stories-page {
-        padding-top: 10px !important;
+    .stories-page,
+    main,
+    .page,
+    .content-section {
+        padding-top: 110px !important; /* extra 20px for hamburger menu */
+    }
+
+    h1, h2, .page-title {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
     }
 }
 
-/* FIX: Remove unintended spacing caused by global classes */
-main {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-}
+       
+
 
