@@ -720,3 +720,40 @@ p {
         min-width: 230px;
     }
 }
+/* FIX: Remove extra top space on Films & Stories pages */
+.page-title,
+.films-page,
+.stories-page {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* Ensure all section headers start right below navbar */
+section {
+    margin-top: 20px;
+}
+
+/* FIX: Mobile top gap under navbar */
+@media (max-width: 768px) {
+    body {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+
+    .navbar {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    .films-page,
+    .stories-page {
+        padding-top: 10px !important;
+    }
+}
+
+/* FIX: Remove unintended spacing caused by global classes */
+main {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
