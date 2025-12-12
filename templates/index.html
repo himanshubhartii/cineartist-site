@@ -5,18 +5,23 @@
     <title>CineArtist | Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- SEO -->
-    <meta name="description" content="CineArtist – cinematic short films, stories and character-based visuals started as SANM Captures, now creating emotional and relatable visual stories.">
-    <meta property="og:title" content="CineArtist | Short Films & Stories">
-    <meta property="og:description" content="Watch cinematic short films and read original stories crafted by CineArtist.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://cineartist.onrender.com/">
+    <meta name="description" content="CineArtist – cinematic short films and emotional stories created from a small-town perspective.">
 
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
-    <!-- Styles -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=14">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=15">
 </head>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggle = document.querySelector(".nav-toggle");
+        const navbar = document.querySelector(".navbar");
+        if (toggle && navbar) {
+            toggle.addEventListener("click", function () {
+                navbar.classList.toggle("open");
+            });
+        }
+    });
+</script>
+
 <body>
 
 <header class="navbar">
@@ -45,41 +50,45 @@
 
     <div class="hero-text">
         <h1 class="hero-title">CineArtist</h1>
+
         <p class="hero-subtitle">
             Latest Film: <span>{{ latest_film.title }}</span>
         </p>
 
-        <div class="hero-meta">
-            <span><strong>Format</strong> Short Film</span>
-            <span><strong>Language</strong> Hindi</span>
-            <span><strong>Genre</strong> Drama • Emotion</span>
+        <div class="hero-meta-row">
+            <span class="meta-pill">Format&nbsp; Short Film</span>
+            <span class="meta-pill">Language&nbsp; Hindi</span>
+            <span class="meta-pill">Genre&nbsp; Drama · Emotion</span>
         </div>
 
-        <a href="{{ latest_film.url }}" target="_blank" class="btn-primary hero-btn">
+        <a href="{{ latest_film.url }}" target="_blank" class="hero-btn">
             Watch Latest Film on YouTube
         </a>
     </div>
 </section>
 
-<!-- MAIN CONTENT -->
-<main class="page home-page">
+<!-- HOME CONTENT -->
+<main class="home-page">
 
-    <!-- About section -->
-    <section class="home-section">
-        <h2 class="section-title">About CineArtist</h2>
-        <p class="section-text">
-            CineArtist is a small-town YouTube experiment that evolved from SANM Captures into a space
-            for cinematic short films, emotional stories and character-based visuals. From school and
-            college days to today, every project is built with a small team and big-screen thinking.
-        </p>
+    <!-- Intro / About -->
+    <section class="home-row">
+        <div class="home-text-block">
+            <h2 class="section-title">About CineArtist</h2>
+            <p>
+                CineArtist is a small-town YouTube experiment that evolved from SANM Captures
+                into a space for cinematic short films, emotional stories and character-based visuals.
+                From school and college days to today, every project is built with a small team
+                and big-screen thinking.
+            </p>
 
-        <div class="home-cta-row">
-            <a href="/films" class="btn-primary">View all films</a>
-            <a href="/about" class="btn-secondary">More about CineArtist</a>
+            <div class="home-cta-row">
+                <a href="/films" class="btn-primary">View all films</a>
+                <a href="/about" class="btn-secondary">More about CineArtist</a>
+            </div>
         </div>
     </section>
 
-    <!-- Featured films strip -->
+    <!-- Featured Films strip -->
     <section class="home-section">
         <h2 class="section-title">Featured Films</h2>
         <p class="section-text">
@@ -87,29 +96,82 @@
         </p>
 
         <div class="featured-strip">
-            <a href="https://www.youtube.com/watch?v=H0Oi7bGxHS4" target="_blank" class="feature-card">
-                <img src="https://img.youtube.com/vi/H0Oi7bGxHS4/hqdefault.jpg" alt="Lamhey thumbnail">
-                <h3>Lamhey</h3>
-                <p>Emotional story of a daughter and her father.</p>
-            </a>
 
-            <a href="https://www.youtube.com/watch?v=MstNrT0tPto" target="_blank" class="feature-card">
-                <img src="https://img.youtube.com/vi/MstNrT0tPto/hqdefault.jpg" alt="Waada thumbnail">
-                <h3>Waada</h3>
-                <p>Two brothers, a promise and a turning point.</p>
-            </a>
+            <!-- Lamhey -->
+            <article class="featured-card">
+                <a href="https://www.youtube.com/watch?v=H0Oi7bGxHS4" target="_blank">
+                    <div class="featured-thumb">
+                        <img src="https://img.youtube.com/vi/H0Oi7bGxHS4/maxresdefault.jpg" alt="Lamhey thumbnail">
+                        <div class="play-btn">▶</div>
+                    </div>
+                </a>
+                <div class="featured-body">
+                    <h3>Lamhey</h3>
+                    <p>Emotional story of a daughter and her father.</p>
+                </div>
+            </article>
 
-            <a href="https://www.youtube.com/watch?v=Yc3Kzg-WuhU" target="_blank" class="feature-card">
-                <img src="https://img.youtube.com/vi/Yc3Kzg-WuhU/hqdefault.jpg" alt="Love Connection thumbnail">
-                <h3>Love Connection</h3>
-                <p>Light-hearted take on youth, love and confusion.</p>
-            </a>
+            <!-- Waada -->
+            <article class="featured-card">
+                <a href="https://www.youtube.com/watch?v=MstNrT0tPto" target="_blank">
+                    <div class="featured-thumb">
+                        <img src="https://img.youtube.com/vi/MstNrT0tPto/maxresdefault.jpg" alt="Waada thumbnail">
+                        <div class="play-btn">▶</div>
+                    </div>
+                </a>
+                <div class="featured-body">
+                    <h3>Waada</h3>
+                    <p>Two brothers and a promise that changes their bond.</p>
+                </div>
+            </article>
+
+            <!-- Love Connection -->
+            <article class="featured-card">
+                <a href="https://www.youtube.com/watch?v=Yc3Kzg-WuhU" target="_blank">
+                    <div class="featured-thumb">
+                        <img src="https://img.youtube.com/vi/Yc3Kzg-WuhU/maxresdefault.jpg" alt="Love Connection thumbnail">
+                        <div class="play-btn">▶</div>
+                    </div>
+                </a>
+                <div class="featured-body">
+                    <h3>Love Connection</h3>
+                    <p>A light-hearted take on youth, love and misunderstandings.</p>
+                </div>
+            </article>
+
+            <!-- Keemat -->
+            <article class="featured-card">
+                <a href="https://www.youtube.com/watch?v=g-Jx01A6Jdo" target="_blank">
+                    <div class="featured-thumb">
+                        <img src="https://img.youtube.com/vi/g-Jx01A6Jdo/maxresdefault.jpg" alt="Keemat thumbnail">
+                        <div class="play-btn">▶</div>
+                    </div>
+                </a>
+                <div class="featured-body">
+                    <h3>Keemat</h3>
+                    <p>What is the real price of honesty in real life?</p>
+                </div>
+            </article>
+
         </div>
     </section>
 
 </main>
 
 <footer class="footer">
+    <div class="social-icons">
+        <a href="https://instagram.com/cineartist_?igsh=MXM2eWI0d2Z3bG5iYQ==" target="_blank" class="icon" aria-label="Instagram">
+            <!-- simple instagram icon -->
+            <svg width="22" height="22" viewBox="0 0 24 24">
+                <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5zM17.75 6a1.25 1.25 0 1 1-1.25 1.25A1.25 1.25 0 0 1 17.75 6z"/>
+            </svg>
+        </a>
+        <a href="https://www.youtube.com/@CineArtist_" target="_blank" class="icon" aria-label="YouTube">
+            <svg width="24" height="24" viewBox="0 0 24 24">
+                <path d="M21.8 8.001a2.75 2.75 0 0 0-1.93-1.947C18.25 5.5 12 5.5 12 5.5s-6.25 0-7.87.554A2.75 2.75 0 0 0 2.2 8.001 28.7 28.7 0 0 0 1.5 12a28.7 28.7 0 0 0 .7 3.999 2.75 2.75 0 0 0 1.93 1.947C5.75 18.5 12 18.5 12 18.5s6.25 0 7.87-.554a2.75 2.75 0 0 0 1.93-1.947A28.7 28.7 0 0 0 22.5 12a28.7 28.7 0 0 0-.7-3.999zM10 15.2V8.8L15.2 12 10 15.2z"/>
+            </svg>
+        </a>
+    </div>
     © 2025 CineArtist • Short Films & Stories
 </footer>
 
@@ -117,7 +179,6 @@
     document.addEventListener("DOMContentLoaded", function () {
         const toggle = document.querySelector(".nav-toggle");
         const navbar = document.querySelector(".navbar");
-
         if (toggle && navbar) {
             toggle.addEventListener("click", function () {
                 navbar.classList.toggle("open");
