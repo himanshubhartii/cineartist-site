@@ -754,7 +754,7 @@ main, .page, .films-page, .stories-page, .content-section {
     main,
     .page,
     .content-section {
-        padding-top: 110px !important; /* extra 20px for hamburger menu */
+        padding-top: 100px !important; /* extra 20px for hamburger menu */
     }
 
     h1, h2, .page-title {
@@ -764,5 +764,6 @@ main, .page, .films-page, .stories-page, .content-section {
 }
 
        
+
 
 
