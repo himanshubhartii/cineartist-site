@@ -2,18 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CineArtist | Home</title>
+    <title>CineArtist | Casting</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
-    <!-- Styles -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=13">
-</head>
 
+    <meta name="description" content="Casting and audition form for CineArtist short films and stories.">
+
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=15">
+</head>
 <body>
 
 <header class="navbar">
-    <!-- Logo now clickable and slightly bigger -->
     <a href="/" class="logo">CineArtist</a>
 
     <button class="nav-toggle" aria-label="Toggle navigation">
@@ -23,57 +22,29 @@
     </button>
 
     <nav class="nav-links">
-        <a href="/" class="{% if request.path == '/' %}active{% endif %}">Home</a>
-        <a href="/about" class="{% if request.path.startswith('/about') %}active{% endif %}">About</a>
-        <a href="/films" class="{% if request.path.startswith('/films') %}active{% endif %}">Films</a>
-        <a href="/stories" class="{% if request.path.startswith('/stories') %}active{% endif %}">Stories</a>
-        <a href="/casting" class="{% if request.path.startswith('/casting') %}active{% endif %}">Casting</a>
-        <a href="/contact" class="{% if request.path.startswith('/contact') %}active{% endif %}">Contact</a>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/films">Films</a>
+        <a href="/stories">Stories</a>
+        <a href="/casting" class="active">Casting</a>
+        <a href="/contact">Contact</a>
     </nav>
 </header>
 
-
 <main class="page">
-    <h1>Casting & Auditions</h1>
-    <p>Share your details if you want to act in upcoming CineArtist short films and concepts.</p>
+    <h1>Casting / Auditions</h1>
+    <p>
+        If you want to be a part of upcoming shorts or concepts, fill in your details below.
+    </p>
 
-    <section class="casting-layout">
-        <!-- LEFT: Info -->
-        <div class="casting-info">
-            <h2>How casting works</h2>
-            <p>
-                We look for natural performances, expressions and honesty in front of the camera.
-                No big portfolio is required – just genuine interest and commitment.
-            </p>
-            <ul>
-                <li>Short films, sketches and character-based stories</li>
-                <li>Mostly shoot in and around local locations</li>
-                <li>Both new and experienced actors are welcome</li>
-            </ul>
-
-            <h3 style="margin-top:16px;">Helpful to share</h3>
-            <ul>
-                <li>Any previous acting or stage experience (if you have)</li>
-                <li>Link to Instagram / YouTube / Reel / Portfolio</li>
-                <li>City & availability for shoot</li>
-            </ul>
-        </div>
-
-        <!-- RIGHT: Form -->
-        <div>
-            <h2>Apply for Casting</h2>
-            <form method="POST" class="form">
-                <input type="text" name="name" placeholder="Full Name" required>
-                <input type="text" name="age" placeholder="Age" required>
-                <input type="text" name="city" placeholder="City / Location" required>
-                <input type="Phone number" name="phone" placeholder="Phone number" required>
-                <input type="text" name="experience" placeholder="Acting Experience (if any)">
-                <input type="text" name="profile_link" placeholder="Profile / Instagram / Reel Link">
-
-                <button type="submit" class="btn-primary">Submit Casting Form</button>
-            </form>
-        </div>
-    </section>
+    <form class="form" method="post" action="/casting">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="number" name="age" placeholder="Age" required>
+        <input type="text" name="city" placeholder="City" required>
+        <textarea name="experience" placeholder="Acting experience / introduction" required></textarea>
+        <input type="text" name="profile_link" placeholder="Portfolio / Instagram / YouTube link (optional)">
+        <button type="submit" class="btn-primary">Submit Application</button>
+    </form>
 </main>
 
 <footer class="footer">
@@ -84,7 +55,6 @@
     document.addEventListener("DOMContentLoaded", function () {
         const toggle = document.querySelector(".nav-toggle");
         const navbar = document.querySelector(".navbar");
-
         if (toggle && navbar) {
             toggle.addEventListener("click", function () {
                 navbar.classList.toggle("open");
@@ -95,6 +65,3 @@
 
 </body>
 </html>
-
-
-
