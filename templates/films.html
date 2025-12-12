@@ -2,18 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CineArtist | Home</title>
+    <title>CineArtist | Films</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Favicon -->
+
+    <meta name="description" content="Short films and visual stories from the CineArtist YouTube channel.">
+
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
-    <!-- Styles -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=13">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=15">
 </head>
-
-
 <body>
+
 <header class="navbar">
-    <!-- Logo now clickable and slightly bigger -->
     <a href="/" class="logo">CineArtist</a>
 
     <button class="nav-toggle" aria-label="Toggle navigation">
@@ -23,15 +22,14 @@
     </button>
 
     <nav class="nav-links">
-        <a href="/" class="{% if request.path == '/' %}active{% endif %}">Home</a>
-        <a href="/about" class="{% if request.path.startswith('/about') %}active{% endif %}">About</a>
-        <a href="/films" class="{% if request.path.startswith('/films') %}active{% endif %}">Films</a>
-        <a href="/stories" class="{% if request.path.startswith('/stories') %}active{% endif %}">Stories</a>
-        <a href="/casting" class="{% if request.path.startswith('/casting') %}active{% endif %}">Casting</a>
-        <a href="/contact" class="{% if request.path.startswith('/contact') %}active{% endif %}">Contact</a>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/films" class="active">Films</a>
+        <a href="/stories">Stories</a>
+        <a href="/casting">Casting</a>
+        <a href="/contact">Contact</a>
     </nav>
 </header>
-
 
 <main class="page">
     <h1>Short Films</h1>
@@ -43,9 +41,9 @@
         <article class="card">
             <h2>Lamhey</h2>
             <p>A journey through time and emotions.</p>
-            <div class="film-tags">
-                <span class="film-tag">Drama</span>
-                <span class="film-tag">Emotional</span>
+            <div class="tag-row">
+                <span class="tag">Drama</span>
+                <span class="tag">Emotional</span>
             </div>
             <a href="https://www.youtube.com/watch?v=H0Oi7bGxHS4" target="_blank">
                 <div class="thumb-wrapper">
@@ -59,9 +57,9 @@
         <article class="card">
             <h2>Waada</h2>
             <p>Two brothers and a promise that changes their bond.</p>
-            <div class="film-tags">
-                <span class="film-tag">Brotherhood</span>
-                <span class="film-tag">Drama</span>
+            <div class="tag-row">
+                <span class="tag">Brotherhood</span>
+                <span class="tag">Drama</span>
             </div>
             <a href="https://www.youtube.com/watch?v=MstNrT0tPto" target="_blank">
                 <div class="thumb-wrapper">
@@ -75,9 +73,9 @@
         <article class="card">
             <h2>Love Connection</h2>
             <p>A light-hearted take on youth, love and misunderstandings.</p>
-            <div class="film-tags">
-                <span class="film-tag">Romance</span>
-                <span class="film-tag">Feel-good</span>
+            <div class="tag-row">
+                <span class="tag">Romance</span>
+                <span class="tag">Feel-good</span>
             </div>
             <a href="https://www.youtube.com/watch?v=Yc3Kzg-WuhU" target="_blank">
                 <div class="thumb-wrapper">
@@ -91,9 +89,9 @@
         <article class="card">
             <h2>Keemat</h2>
             <p>What is the real price of honesty in real life?</p>
-            <div class="film-tags">
-                <span class="film-tag">Social</span>
-                <span class="film-tag">Drama</span>
+            <div class="tag-row">
+                <span class="tag">Social</span>
+                <span class="tag">Drama</span>
             </div>
             <a href="https://www.youtube.com/watch?v=g-Jx01A6Jdo" target="_blank">
                 <div class="thumb-wrapper">
@@ -107,9 +105,9 @@
         <article class="card">
             <h2>26 January</h2>
             <p>Patriotism, friendship and a school celebration.</p>
-            <div class="film-tags">
-                <span class="film-tag">Patriotism</span>
-                <span class="film-tag">School</span>
+            <div class="tag-row">
+                <span class="tag">Patriotism</span>
+                <span class="tag">School</span>
             </div>
             <a href="https://www.youtube.com/watch?v=K0HDODGqV0w" target="_blank">
                 <div class="thumb-wrapper">
@@ -122,10 +120,10 @@
         <!-- 6 -->
         <article class="card">
             <h2>Pledge</h2>
-            <p>A promise made in college… and the cost of keeping it.</p>
-            <div class="film-tags">
-                <span class="film-tag">College</span>
-                <span class="film-tag">Drama</span>
+            <p>A promise made in college... and the cost of keeping it.</p>
+            <div class="tag-row">
+                <span class="tag">College</span>
+                <span class="tag">Drama</span>
             </div>
             <a href="https://www.youtube.com/watch?v=u6MN-J9PmEk" target="_blank">
                 <div class="thumb-wrapper">
@@ -139,9 +137,9 @@
         <article class="card">
             <h2>Diwali in Parallel World</h2>
             <p>Two different Diwali nights – same festival, different realities.</p>
-            <div class="film-tags">
-                <span class="film-tag">Festival</span>
-                <span class="film-tag">Parallel World</span>
+            <div class="tag-row">
+                <span class="tag">Festival</span>
+                <span class="tag">Contrast</span>
             </div>
             <a href="https://www.youtube.com/watch?v=1J-nHyiEoc8" target="_blank">
                 <div class="thumb-wrapper">
@@ -155,9 +153,9 @@
         <article class="card">
             <h2>Types of Nai You Never Met</h2>
             <p>Comedy sketch based on different types of barbers.</p>
-            <div class="film-tags">
-                <span class="film-tag">Comedy</span>
-                <span class="film-tag">Slice of Life</span>
+            <div class="tag-row">
+                <span class="tag">Comedy</span>
+                <span class="tag">Slice-of-life</span>
             </div>
             <a href="https://www.youtube.com/watch?v=GBjlYC9wU8Y" target="_blank">
                 <div class="thumb-wrapper">
@@ -170,10 +168,10 @@
         <!-- 9 -->
         <article class="card">
             <h2>Game Never Ends 2</h2>
-            <p>When the game goes beyond the screen and affects real life.</p>
-            <div class="film-tags">
-                <span class="film-tag">Youth</span>
-                <span class="film-tag">Drama</span>
+            <p>When online games and reality start mixing.</p>
+            <div class="tag-row">
+                <span class="tag">Gaming</span>
+                <span class="tag">Drama</span>
             </div>
             <a href="https://www.youtube.com/watch?v=ffpW_M3-p9A" target="_blank">
                 <div class="thumb-wrapper">
@@ -186,14 +184,14 @@
         <!-- 10 -->
         <article class="card">
             <h2>Types of Customer in Bihar</h2>
-            <p>Fun take on different types of customers in daily life.</p>
-            <div class="film-tags">
-                <span class="film-tag">Comedy</span>
-                <span class="film-tag">Regional</span>
+            <p>Fun look at different customers coming to a shop.</p>
+            <div class="tag-row">
+                <span class="tag">Comedy</span>
+                <span class="tag">Regional</span>
             </div>
             <a href="https://www.youtube.com/watch?v=iWzFtNrV3k4" target="_blank">
                 <div class="thumb-wrapper">
-                    <img src="https://img.youtube.com/vi/iWzFtNrV3k4/maxresdefault.jpg" alt="Types of Customer in Bihar">
+                    <img src="https://img.youtube.com/vi/iWzFtNrV3k4/maxresdefault.jpg" alt="Types of customer in Bihar">
                     <div class="play-btn">▶</div>
                 </div>
             </a>
@@ -201,15 +199,15 @@
 
         <!-- 11 -->
         <article class="card">
-            <h2>It Only Happens in Online Classes</h2>
-            <p>All the crazy things we saw during online lectures.</p>
-            <div class="film-tags">
-                <span class="film-tag">Comedy</span>
-                <span class="film-tag">Relatable</span>
+            <h2>It's Only Happen in Online Classes</h2>
+            <p>Things that happened only in online lectures.</p>
+            <div class="tag-row">
+                <span class="tag">Comedy</span>
+                <span class="tag">Online classes</span>
             </div>
             <a href="https://www.youtube.com/watch?v=K7QTURpAte0" target="_blank">
                 <div class="thumb-wrapper">
-                    <img src="https://img.youtube.com/vi/K7QTURpAte0/maxresdefault.jpg" alt="Online Classes">
+                    <img src="https://img.youtube.com/vi/K7QTURpAte0/maxresdefault.jpg" alt="Online classes">
                     <div class="play-btn">▶</div>
                 </div>
             </a>
@@ -218,10 +216,10 @@
         <!-- 12 -->
         <article class="card">
             <h2>Half Vision</h2>
-            <p>A character who doesn’t see life fully – until something happens.</p>
-            <div class="film-tags">
-                <span class="film-tag">Psychological</span>
-                <span class="film-tag">Drama</span>
+            <p>A story about how we see only half of reality.</p>
+            <div class="tag-row">
+                <span class="tag">Drama</span>
+                <span class="tag">Perspective</span>
             </div>
             <a href="https://www.youtube.com/watch?v=rVViXrtjlgI" target="_blank">
                 <div class="thumb-wrapper">
@@ -234,10 +232,10 @@
         <!-- 13 -->
         <article class="card">
             <h2>Game Never Ends</h2>
-            <p>The original story that started the “Game Never Ends” concept.</p>
-            <div class="film-tags">
-                <span class="film-tag">Youth</span>
-                <span class="film-tag">Drama</span>
+            <p>Friendship and gaming blended into one story.</p>
+            <div class="tag-row">
+                <span class="tag">Friendship</span>
+                <span class="tag">Drama</span>
             </div>
             <a href="https://www.youtube.com/watch?v=PhijsI_ohzQ" target="_blank">
                 <div class="thumb-wrapper">
@@ -258,7 +256,6 @@
     document.addEventListener("DOMContentLoaded", function () {
         const toggle = document.querySelector(".nav-toggle");
         const navbar = document.querySelector(".navbar");
-
         if (toggle && navbar) {
             toggle.addEventListener("click", function () {
                 navbar.classList.toggle("open");
@@ -269,5 +266,3 @@
 
 </body>
 </html>
-
-
